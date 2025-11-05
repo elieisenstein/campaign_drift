@@ -1,5 +1,5 @@
 # sms_embed.py
-# Stage 4: Embeddings only (no centroid/footprint yet).
+# Embeddings only (no centroid/footprint yet).
 # Requirements: pip install sentence-transformers numpy pandas
 
 from typing import Iterable, Optional, Tuple
@@ -22,14 +22,6 @@ os.environ.pop("HUGGINGFACEHUB_API_TOKEN", None)
 os.environ.pop("HF_TOKEN", None)
 
 MODEL_NAME = r"C:/models/all-MiniLM-L6-v2"   # your local folder path
-#MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-model = SentenceTransformer(MODEL_NAME)
-
-# quick test
-print("Embedding dimension:", model.get_sentence_embedding_dimension())
-
-
-
 
 # Where to store vectors/metadata (Parquet recommended)
 # - You can later move the metadata rows to sqlite if desired (id/text/shape).
@@ -132,8 +124,8 @@ def load_embeddings(
     """
     Load metadata and vectors saved by save_embeddings.
     """
-    pq_path = os.path.join(out_dir, f"{prefix}.parquet")
+    csv_path = os.path.join(out_dir, f"{prefix}.csv")
     npy_path = os.path.join(out_dir, f"{prefix}.npy")
-    meta_df = pd.read_parquet(pq_path)
+    meta_df = pd.read_csv(csv_path)
     X = np.load(npy_path, mmap_mode="r")  # memory-mapped; cast to contiguous if you need to write
     return meta_df, X
