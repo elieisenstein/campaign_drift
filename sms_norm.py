@@ -66,6 +66,9 @@ OTP_CONTEXT_RE = re.compile(
 OTP_BARE_RE   = re.compile(r'\b([0-9]{4,8})\b')
 GENERIC_NUM_RE = re.compile(r'(?<![{A-Za-z])\b\d+(?:[\.,]\d+)?\b(?![}\w])')
 
+# Updated gate regex: match "gate" + optional spaces + letter(s) + digits
+GATE_RE = re.compile(r"\bgate\s*[a-zA-Z]\d{1,3}\b", re.IGNORECASE)
+
 # ---------- Masking helpers ----------
 def _is_generic(name: str) -> bool:
     return name.strip().lower() in GENERIC_TERMS
@@ -121,11 +124,15 @@ def replace_urls_with_domain(text: str) -> Tuple[str, int]:
     return URL_RE.sub(repl, text), count
 
 def mask_otps_and_numbers(text: str) -> str:
+
+    # 0) Gate identifiers: "gate C18" or standalone "C18" → {GATE}
+    t = GATE_RE.sub("{GATE}", text)
+
     # 1) OTP in context: replace digits only
     def ctx_repl(m):
         full = m.group(0); num = m.group(1)
         return full.replace(num, "{OTP}")
-    t = OTP_CONTEXT_RE.sub(ctx_repl, text)
+    t = OTP_CONTEXT_RE.sub(ctx_repl, t)
     # 2) Bare 4–8 digit tokens likely OTPs
     t = OTP_BARE_RE.sub("{OTP}", t)
     # 3) Remaining numbers → {NUM}
@@ -146,8 +153,8 @@ def normalize_text(original: str) -> str:
     t, _ = replace_emails(t)
     t, _ = replace_phones(t)
     t, _ = replace_urls_with_domain(t)
-    t = mask_otps_and_numbers(t)
     t = t.lower()
+    t = mask_otps_and_numbers(t)
     t = re.sub(r'\s+', ' ', t).strip()
     return t
 
