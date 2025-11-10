@@ -1,4 +1,12 @@
-matplotlib==3.10.7
-numpy==2.3.4
-pandas==2.3.3
-sentence_transformers==5.1.2
+sentence-transformers==5.1.2
+torch==2.9.0
+transformers==4.57.1
+numpy==2.3.3
+pandas==2.3.2
+matplotlib==3.10.6
+umap-learn==0.5.9.post2
+hdbscan==0.8.40
+scikit-learn==1.7.2
+joblib==1.5.2
+pynndescent==0.5.13
+tqdm==4.67.1
