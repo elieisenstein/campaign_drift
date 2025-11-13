@@ -120,12 +120,13 @@ def save_embeddings(
 def load_embeddings(
     out_dir: str = DEFAULT_OUT_DIR,
     prefix: str = "embeds",
+    encoding: str = "utf-8"
 ) -> Tuple[pd.DataFrame, np.ndarray]:
     """
     Load metadata and vectors saved by save_embeddings.
     """
     csv_path = os.path.join(out_dir, f"{prefix}.csv")
     npy_path = os.path.join(out_dir, f"{prefix}.npy")
-    meta_df = pd.read_csv(csv_path)
+    meta_df = pd.read_csv(csv_path, encoding=encoding)
     X = np.load(npy_path, mmap_mode="r")  # memory-mapped; cast to contiguous if you need to write
     return meta_df, X
