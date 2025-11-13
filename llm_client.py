@@ -48,7 +48,8 @@ Task: produce a single concise label for this campaign using at most {max_words}
 - Keep it short, descriptive, and generic (no personal data, no phone numbers, no OTPs).
 - Use Title Case or lower-case (consistent across campaigns).
 - Do NOT include punctuation at the end.
-Reply with the label only (no explanation).
+- Reply with the label only (no explanation).
+- Don't use the word "campaign" in the label.
 """
 
 def _build_prompt(samples: List[str], max_words: int) -> str:
