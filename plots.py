@@ -21,7 +21,25 @@ def _nongray_colors(n: int):
         i += 1
     return out
 
-def plot_campaigns(X_2d, labels, cluster_ids, save_path):
+def plot_campaigns(X_2d, labels, cluster_ids, save_path, campaign_names=None):
+    """
+    Plot UMAP visualization with campaigns
+    
+    Parameters:
+    -----------
+    X_2d : array
+        2D UMAP coordinates
+    labels : array
+        Cluster labels for each point
+    cluster_ids : list
+        List of cluster IDs to plot
+    save_path : str
+        Path to save the plot
+    campaign_names : dict or list, optional
+        If dict: maps cluster_id to campaign name
+        If list: aligned with cluster_ids order
+        If None: uses generic "Campaign {id}" labels
+    """
     
     plt.figure(figsize=(10, 8), dpi=160)
 
@@ -40,33 +58,51 @@ def plot_campaigns(X_2d, labels, cluster_ids, save_path):
     for i, c in enumerate(cluster_ids):
         idx = np.where(labels == c)[0]
         col = colors[i]
+        
+        # Get campaign name if provided
+        if campaign_names is not None:
+            if isinstance(campaign_names, dict):
+                name = campaign_names.get(c, "Unknown")
+            elif isinstance(campaign_names, list):
+                name = campaign_names[i] if i < len(campaign_names) and campaign_names[i] else "Unknown"
+            else:
+                name = "Unknown"
+        else:
+            name = f"Campaign {c}"
+        
+        # Format legend label as "cluster_id: campaign_name"
+        # Truncate name if too long for legend
+        if len(name) > 30:
+            name = name[:27] + "..."
+        legend_label = f"{c}: {name}"
+        
         # points
         plt.scatter(
             X_2d[idx, 0], X_2d[idx, 1],
             s=80, c=col, marker="o", alpha=0.85,
-            linewidths=0.4, edgecolors="white", label=f"Campaign {c}"
+            linewidths=0.4, edgecolors="white", label=legend_label
         )
         # centroid (mean in 2D) with big star + black edge
         cx, cy = X_2d[idx].mean(axis=0)
         plt.scatter([cx], [cy],
             s=700, c=col, marker="*", edgecolors="black", linewidths=1.8,
-            label=f"Centroid {c}", zorder=5
+            zorder=5  # No separate label for centroid to avoid legend clutter
         )
         # label
         plt.text(cx, cy, f"C{c}", fontsize=11, weight="bold", color="black",
                  ha="center", va="center", zorder=6,
                  bbox=dict(facecolor="white", edgecolor=col, boxstyle="round,pad=0.25", alpha=0.9))
 
-    plt.title("UMAP (2D) + HDBSCAN campaigns\nColors = campaigns (non-gray), Stars = centroids (C#)")
+    plt.title("UMAP (2D) + HDBSCAN campaigns\nColors = campaigns, Stars = centroids")
     plt.xlabel("UMAP-1"); plt.ylabel("UMAP-2"); plt.grid(True, alpha=0.3)
 
-    # de-dup legend
+    # de-dup legend (though with new approach we shouldn't have duplicates)
     handles, labels_ = plt.gca().get_legend_handles_labels()
     seen, H, L = set(), [], []
     for h, l in zip(handles, labels_):
         if l not in seen:
             H.append(h); L.append(l); seen.add(l)
-    plt.legend(H, L, loc="best", fontsize=8, ncol=2, frameon=True)
+    plt.legend(H, L, loc="best", fontsize=8, ncol=1, frameon=True)
 
     plt.tight_layout()
     plt.savefig(save_path, bbox_inches="tight", dpi=160)
@@ -191,4 +227,3 @@ def plot_ref_stars_mean2d_with_new(
         plt.savefig(save_path, bbox_inches="tight", dpi=160)
     plt.show()
     plt.close()
-
