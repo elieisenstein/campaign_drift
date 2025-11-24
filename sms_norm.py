@@ -69,7 +69,32 @@ GENERIC_NUM_RE = re.compile(r'(?<![{A-Za-z])\b\d+(?:[\.,]\d+)?\b(?![}\w])')
 # Updated gate regex: match "gate" + optional spaces + letter(s) + digits
 GATE_RE = re.compile(r"\bgate\s*[a-zA-Z]\d{1,3}\b", re.IGNORECASE)
 
+# Name after colon in "X: john doe sent you ..." → mask as {NAME}
+NAME_AFTER_COLON_SENT_RE = re.compile(
+    r'(:\s*)([A-Za-z][A-Za-z\'\-]*(?:\s+[A-Za-z][A-Za-z\'\-]*){0,3})(\s+sent you\b)',
+    re.IGNORECASE
+)
+
+RAW_TIME_RE = re.compile(
+    r"\b(\d{1,2}):(\d{2})\s*(am|pm)\s*et\b",
+    re.IGNORECASE
+)
+
+
+
 # ---------- Masking helpers ----------
+def mask_name_after_colon_sent(text: str) -> str:
+    """
+    Turn patterns like:
+      'chase | zelle(r): sydney nguyen sent you $50 ...'
+    into:
+      'chase | zelle(r): {NAME} sent you $50 ...'
+    """
+    def repl(m):
+        return f"{m.group(1)}{{NAME}}{m.group(3)}"
+    return NAME_AFTER_COLON_SENT_RE.sub(repl, text)
+
+
 def _is_generic(name: str) -> bool:
     return name.strip().lower() in GENERIC_TERMS
 
@@ -139,6 +164,14 @@ def mask_otps_and_numbers(text: str) -> str:
     t = GENERIC_NUM_RE.sub("{NUM}", t)
     return t
 
+def collapse_raw_time(text: str) -> str:
+    """
+    Convert '11:06 PM ET' → '{TIME}' before number masking.
+    """
+    return RAW_TIME_RE.sub("{TIME}", text)
+
+
+
 # ---------- Public normalization API ----------
 def normalize_text(original: str) -> str:
     """
@@ -150,10 +183,12 @@ def normalize_text(original: str) -> str:
     """
     t = normalize_unicode_basic(original)
     t = anonymize_names_preserving_greeting(t)
+    t = mask_name_after_colon_sent(t)
     t, _ = replace_emails(t)
     t, _ = replace_phones(t)
     t, _ = replace_urls_with_domain(t)
     t = t.lower()
+    t = collapse_raw_time(t)
     t = mask_otps_and_numbers(t)
     t = re.sub(r'\s+', ' ', t).strip()
     return t
@@ -181,3 +216,16 @@ def dedupe_by_hash(df: pd.DataFrame, hash_col: str = "template_hash_xx64"):
     group_sizes = df.groupby(hash_col, as_index=True).size().rename("count_in_window")
     dedup_df = dedup_df.merge(group_sizes, left_on=hash_col, right_index=True, how="left")
     return dedup_df, group_sizes
+
+
+
+if __name__ == "__main__":
+    samples = [
+        "chase | zelle(r): sydney nguyen sent you $50 & it's ready now. reply stop to cancel these texts.",
+        "chase | zelle(r): landau tzou sent you $120.75 & it's ready now. reply stop to cancel these texts.",
+        "chase | zelle(r): jose trevino sent you $9 & it's ready now. reply stop to cancel these texts.",
+    ]
+    df = normalize_and_hash_series(samples, seed=1)
+
+    print(df[["raw_text"]].to_string(index=False))
+    print(df[["normalized_text"]].to_string(index=False))

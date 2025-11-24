@@ -19,8 +19,6 @@ def save_campaign_footprint(
     campaigns_df: pd.DataFrame,
     centroids: np.ndarray,
     campaign_examples_df: pd.DataFrame,
-    points_meta: pd.DataFrame,
-    points_2d: np.ndarray,
 ):
     os.makedirs(out_dir, exist_ok=True)
     # filenames
@@ -47,24 +45,8 @@ def save_campaign_footprint(
         ])
     campaign_examples_df.to_csv(examples_csv, index=False, encoding="utf-8")
 
-    # Build points CSV: include basic meta columns + umap coords + label (if present in points_meta)
-    points_df = pd.DataFrame()
-    # We prefer to copy over the important template/meta columns if present
-    for c in ["template_hash_xx64", "normalized_text", "raw_text", "message_id", "count_in_window"]:
-        if c in points_meta.columns:
-            points_df[c] = points_meta[c]
-    # Add umap coords and label (if provided)
-    points_df["umap_x"] = points_2d[:, 0]
-    points_df["umap_y"] = points_2d[:, 1]
-    # If there's an existing label column in points_meta, preserve it; else set to -1
-    if "label" in points_meta.columns:
-        points_df["label"] = points_meta["label"]
-    else:
-        points_df["label"] = -1
-    points_df.to_csv(points_csv, index=False, encoding="utf-8")
-
     print("Saved artifacts:")
     print(" - campaigns_csv:", campaigns_csv)
     print(" - centroids_npy:", centroids_npy)
     print(" - campaign_examples_csv:", examples_csv)
-    print(" - points_csv:", points_csv)
+

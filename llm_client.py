@@ -1,6 +1,6 @@
 # llm_client.py
 """
-Lightweight LLM summarizer helper (OpenAI new syntax, 2024+).
+Lightweight LLM summarizer helper (uses AzureChatClient API from your working example).
 
 Public API:
     summarize_samples(samples, max_words=5, model="gpt-4o-mini", temperature=0.0, call_llm_fn=None)
@@ -9,7 +9,7 @@ Public API:
 Notes:
 - samples: list[str] (prefer masked/normalized_text upstream)
 - call_llm_fn: optional callable(prompt: str, temperature: float) -> dict-like or str
-- This file will try to auto-load a .env in the current working directory using python-dotenv.
+- This file will try to auto-load a .env in the same folder as this script using python-dotenv.
 """
 
 from typing import List, Tuple, Optional, Any
@@ -17,25 +17,24 @@ import os
 import re
 import pathlib
 
-
-# ✅ PUT THIS BLOCK RIGHT HERE (after imports, before OpenAI import)
+# ✅ PUT THIS BLOCK RIGHT HERE (after imports, before Azure import)
 # ----------------------------------------------------------------
 try:
     from dotenv import load_dotenv  # pip install python-dotenv
 
-    # always load .env FROM THE SAME FOLDER as this script (Windows safe)
     script_dir = pathlib.Path(__file__).resolve().parent
     dotenv_path = script_dir / ".env"
 
     if dotenv_path.exists():
         load_dotenv(dotenv_path=dotenv_path)
-        print(f".env loaded from: {dotenv_path}")   # can comment out later
+        print(f".env loaded from: {dotenv_path}")
     else:
         print(".env NOT FOUND next to llm_client.py")
 
 except Exception as e:
     print("dotenv load error:", e)
 # ----------------------------------------------------------------
+
 # -------------------------
 # Prompt + postprocessing
 # -------------------------
@@ -45,6 +44,7 @@ Examples:
 {examples}
 
 Task: produce a single concise label for this campaign using at most {max_words} words.
+- If language is not English, give the label in English and add at the end of the name the language in parentheses, e.g. (Spanish)!!
 - Keep it short, descriptive, and generic (no personal data, no phone numbers, no OTPs).
 - Use Title Case or lower-case (consistent across campaigns).
 - Do NOT include punctuation at the end.
@@ -68,13 +68,15 @@ def _postprocess_label(text: str, max_words: int) -> str:
     return " ".join(tokens).strip()
 
 # -------------------------
-# Lazy OpenAI loader
+# Lazy Azure client loader (uses your working example's API)
 # -------------------------
-def _get_openai_client() -> Optional[Any]:
-    """Lazy import and instantiate OpenAI. Returns client or None."""
+def _get_azure_chat_client() -> Optional[Any]:
+    """Lazy import and instantiate AzureChatClient via ServiceConfig like your working example."""
     try:
-        from openai import OpenAI  # NEW syntax
-        return OpenAI()            # reads OPENAI_API_KEY from env
+        # these imports should match the module that provides ServiceConfig and AzureChatClient
+        from client import ServiceConfig, AzureChatClient
+        cfg = ServiceConfig.load()
+        return AzureChatClient(cfg)
     except Exception:
         return None
 
@@ -100,34 +102,28 @@ def summarize_samples(
         try:
             raw = call_llm_fn(prompt=prompt, temperature=temperature)
             txt = raw.get("text") if isinstance(raw, dict) else str(raw)
-            return _postprocess_label(txt, max_words=max_words), raw # type: ignore
+            return _postprocess_label(txt, max_words=max_words), raw  # type: ignore
         except Exception as e:
             return "", {"error": "call_llm_fn_failed", "exc": str(e)}
 
-    # Try OpenAI (only if API key is set)
-    
-    if os.getenv("OPENAI_API_KEY"):
-        client = _get_openai_client()
-        if client:
-            try:
-                resp = client.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {"role": "system", "content": "You are a concise summarizer."},
-                        {"role": "user", "content": prompt},
-                    ],
-                    temperature=float(temperature),
-                    max_tokens=32,
-                )
-                txt = resp.choices[0].message.content
-                return _postprocess_label(txt, max_words=max_words), resp
-            except Exception as e:
-                return "", {"error": "openai_call_failed", "exc": str(e)}
-        else:
-            return "", {"error": "openai_client_import_failed"}
+    # Try AzureChatClient (from your working example)
+    client = _get_azure_chat_client()
+    if client:
+        try:
+            # call the same chat(...) API as in your working example
+            results, meta = client.chat(prompt)
+            # results might be a string or dict; try to extract text
+            if isinstance(results, dict):
+                # common keys: "text", "content", etc.
+                txt = results.get("text") or results.get("content") or str(results)
+            else:
+                txt = str(results)
 
-    return "", {"error": "no_llm_available"}
-
+            return _postprocess_label(txt, max_words=max_words), {"azure_raw": meta, "azure_result": results}
+        except Exception as e:
+            return "", {"error": "azure_chat_call_failed", "exc": str(e)}
+    else:
+        return "", {"error": "azure_client_import_failed"}
 
 # ----------------------------------------------------------
 # CLI TEST RUNNER  (runs sample messages)
@@ -138,19 +134,25 @@ if __name__ == "__main__":
     print("\n[ llm_client.py self-test (verbose) ]\n")
 
     example_samples = [
-        "use code {OTP} to complete your login at {url:example.com} thanks.",
-        "one-time password {OTP} for your account. never share this code.",
-        "{name}, use code {OTP} to complete your login at {url:example.com} thanks.",
-        "{name}, security code {OTP} to confirm your transaction at {url:example.com}",
-        "your otp is {OTP}. do not share. visit {url:example.com}",
-        "{name}, your otp is {OTP}. do not share. visit {url:example.com} thanks.",
-        "otp {OTP} valid for {NUM} minutes. use it to sign in."
+        #"use code {OTP} to complete your login at {url:example.com} thanks.",
+        #"one-time password {OTP} for your account. never share this code.",
+        #"{name}, use code {OTP} to complete your login at {url:example.com} thanks.",
+        #"{name}, security code {OTP} to confirm your transaction at {url:example.com}",
+        #"your otp is {OTP}. do not share. visit {url:example.com}",
+        #"{name}, your otp is {OTP}. do not share. visit {url:example.com} thanks.",
+        #"otp {OTP} valid for {NUM} minutes. use it to sign in."
+        "cuenta chase {OTP}: transacciÃ³n de tarjeta de dÃ©bito de ${NUM} a costco whse #{OTP} el nov {NUM}, {OTP} a las {TIME} hora del este, excede ${NUM}.",
+        "cuenta chase {OTP}: transacciÃ³n de tarjeta de dÃ©bito de ${NUM} a klarna*{url:temu.com} el nov {NUM}, {OTP} a las {TIME} hora del este, excede ${NUM}.",
+        "cuenta chase {OTP}: transacciÃ³n de tarjeta de dÃ©bito de ${NUM} a sunpass el nov {NUM}, {OTP} a las {TIME} hora del este, excede ${NUM}.",
+        "cuenta chase {OTP}: transacciÃ³n de tarjeta de dÃ©bito de ${NUM} a roadrunner express el nov {NUM}, {OTP} a las {TIME} hora del este, excede ${NUM}.",
+        "cuenta chase {OTP}: transacciÃ³n de tarjeta de dÃ©bito de ${NUM} a {url:amazon.com} el nov {NUM}, {OTP} a las {TIME} hora del este, excede ${NUM}."
     ]
 
     label, raw = summarize_samples(example_samples, max_words=5, model="gpt-4o-mini")
 
     print("Result label:", repr(label))
-    print("\nRaw response (repr):")
+    #print("\nRaw response (repr):")
+    """
     print(repr(raw))
     print("\nRaw response (pretty JSON if possible):")
     try:
@@ -160,7 +162,7 @@ if __name__ == "__main__":
 
     if not label:
         print("\nHINT: label is empty. Common causes:")
-        print(" - OPENAI_API_KEY not set or .env not loaded.")
-        print(" - openai package not installed in this Python interpreter.")
-        print(" - client import failed or model call failed (see raw response above).")
+        print(" - ServiceConfig.load() may fail or .env not set for Azure client.")
+        print(" - client module not installed or AzureChatClient API changed.")
+        """
     print("\nDone.\n")
