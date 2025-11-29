@@ -1,0 +1,201 @@
+originator_id,message_id,raw_text
+orig_001,bank_0001,Use code 043321 to complete your login at https://bank.example.net. Do not share this code.
+orig_001,bank_0002,Use code 960013 to complete your login at https://login.example.org. Do not share this code.
+orig_001,bank_0003,"Login attempt detected. If this was you, enter 908386 at https://login.example.org within 5 minutes."
+orig_001,bank_0004,Your OTP is 940265. Do not share. Visit http://verify-now.co to proceed.
+orig_001,bank_0005,One-time password 351161 for your account. Never share. Expires in 10 minutes.
+orig_001,bank_0006,Security code 594078 to confirm your transaction. Need help? Visit https://secure.example.com
+orig_001,bank_0007,Your OTP is 184959. Do not share. Visit https://login.example.org to proceed.
+orig_001,bank_0008,Use code 034131 to complete your login at https://safe-auth.app. Do not share this code.
+orig_001,bank_0009,Security code 752553 to confirm your transaction. Need help? Visit http://verify-now.co
+orig_001,bank_0010,Use code 928327 to complete your login at https://safe-auth.app. Do not share this code.
+orig_001,bank_0011,Security code 835030 to confirm your transaction. Need help? Visit http://verify-now.co
+orig_001,bank_0012,Your OTP is 413953. Do not share. Visit https://safe-auth.app to proceed.
+orig_001,bank_0013,Your OTP is 724238. Do not share. Visit https://bank.example.net to proceed.
+orig_001,bank_0014,Security code 969653 to confirm your transaction. Need help? Visit https://login.example.org
+orig_001,bank_0015,"Login attempt detected. If this was you, enter 710122 at https://safe-auth.app within 5 minutes."
+orig_001,bank_0016,"Login attempt detected. If this was you, enter 166978 at http://verify-now.co within 5 minutes."
+orig_001,bank_0017,"Login attempt detected. If this was you, enter 018451 at http://verify-now.co within 5 minutes."
+orig_001,bank_0018,Your OTP is 270482. Do not share. Visit https://bank.example.net to proceed.
+orig_001,bank_0019,Use code 489325 to complete your login at https://login.example.org. Do not share this code.
+orig_001,bank_0020,"Login attempt detected. If this was you, enter 809570 at https://secure.example.com within 5 minutes."
+orig_001,bank_0021,Security code 430391 to confirm your transaction. Need help? Visit https://secure.example.com
+orig_001,bank_0022,Your OTP is 182278. Do not share. Visit https://login.example.org to proceed.
+orig_001,bank_0023,Security code 896383 to confirm your transaction. Need help? Visit http://verify-now.co
+orig_001,bank_0024,Your OTP is 578713. Do not share. Visit https://login.example.org to proceed.
+orig_001,bank_0025,Use code 509839 to complete your login at https://login.example.org. Do not share this code.
+orig_001,bank_0026,Use code 103105 to complete your login at https://secure.example.com. Do not share this code.
+orig_001,bank_0027,"Login attempt detected. If this was you, enter 347382 at https://bank.example.net within 5 minutes."
+orig_001,bank_0028,"Login attempt detected. If this was you, enter 737631 at https://secure.example.com within 5 minutes."
+orig_001,bank_0029,Your OTP is 566701. Do not share. Visit https://secure.example.com to proceed.
+orig_001,bank_0030,Your OTP is 513338. Do not share. Visit https://safe-auth.app to proceed.
+orig_001,bank_0031,One-time password 624731 for your account. Never share. Expires in 10 minutes.
+orig_001,bank_0032,Your OTP is 810801. Do not share. Visit https://login.example.org to proceed.
+orig_001,bank_0033,One-time password 677360 for your account. Never share. Expires in 10 minutes.
+orig_001,bank_0034,One-time password 606474 for your account. Never share. Expires in 10 minutes.
+orig_001,bank_0035,Your OTP is 872343. Do not share. Visit https://secure.example.com to proceed.
+orig_001,bank_0036,"Login attempt detected. If this was you, enter 805009 at https://safe-auth.app within 5 minutes."
+orig_001,bank_0037,"Login attempt detected. If this was you, enter 820812 at https://secure.example.com within 5 minutes."
+orig_001,bank_0038,"Login attempt detected. If this was you, enter 136193 at https://bank.example.net within 5 minutes."
+orig_001,bank_0039,"Login attempt detected. If this was you, enter 091699 at https://bank.example.net within 5 minutes."
+orig_001,bank_0040,Security code 435346 to confirm your transaction. Need help? Visit https://login.example.org
+orig_001,delivery_0001,Your package is arriving today between 14:30–19:00. Manage options: https://shiptrack.io
+orig_001,delivery_0002,Delivery attempt failed. Update address or choose pickup at https://courier.app/track.
+orig_001,delivery_0003,Customs cleared. Estimated delivery tomorrow. Track at https://shiptrack.io
+orig_001,delivery_0004,Parcel out for delivery with DashDelivery. Reschedule at http://delivery.example.com.
+orig_001,delivery_0005,Customs cleared. Estimated delivery tomorrow. Track at https://parcel.example.net
+orig_001,delivery_0006,Shipment scheduled. Track progress at https://parcel.example.net. Signature may be required.
+orig_001,delivery_0007,Parcel out for delivery with ParcelGo. Reschedule at https://parcel.example.net.
+orig_001,delivery_0008,Your package is arriving today between 09:45–20:30. Manage options: https://courier.app/track
+orig_001,delivery_0009,Customs cleared. Estimated delivery tomorrow. Track at https://shiptrack.io
+orig_001,delivery_0010,Customs cleared. Estimated delivery tomorrow. Track at https://parcel.example.net
+orig_001,delivery_0011,Parcel out for delivery with ParcelGo. Reschedule at https://parcel.example.net.
+orig_001,delivery_0012,Parcel out for delivery with QuickShip. Reschedule at https://courier.app/track.
+orig_001,delivery_0013,Shipment scheduled. Track progress at https://parcel.example.net. Signature may be required.
+orig_001,delivery_0014,Your package is arriving today between 16:15–18:30. Manage options: http://delivery.example.com
+orig_001,delivery_0015,Your package is arriving today between 15:45–11:00. Manage options: https://shiptrack.io
+orig_001,delivery_0016,Delivery attempt failed. Update address or choose pickup at https://parcel.example.net.
+orig_001,delivery_0017,Parcel out for delivery with QuickShip. Reschedule at https://parcel.example.net.
+orig_001,delivery_0018,Shipment scheduled. Track progress at https://parcel.example.net. Signature may be required.
+orig_001,delivery_0019,Shipment scheduled. Track progress at http://track-now.org. Signature may be required.
+orig_001,delivery_0020,Customs cleared. Estimated delivery tomorrow. Track at http://track-now.org
+orig_001,delivery_0021,Customs cleared. Estimated delivery tomorrow. Track at https://shiptrack.io
+orig_001,delivery_0022,Parcel out for delivery with QuickShip. Reschedule at http://delivery.example.com.
+orig_001,delivery_0023,Customs cleared. Estimated delivery tomorrow. Track at https://shiptrack.io
+orig_001,delivery_0024,Your package is arriving today between 16:15–13:15. Manage options: https://shiptrack.io
+orig_001,delivery_0025,Your package is arriving today between 12:00–12:15. Manage options: http://delivery.example.com
+orig_001,delivery_0026,Parcel out for delivery with SwiftCourier. Reschedule at https://courier.app/track.
+orig_001,delivery_0027,Delivery attempt failed. Update address or choose pickup at https://courier.app/track.
+orig_001,delivery_0028,Shipment scheduled. Track progress at http://delivery.example.com. Signature may be required.
+orig_001,delivery_0029,Shipment scheduled. Track progress at http://delivery.example.com. Signature may be required.
+orig_001,delivery_0030,Delivery attempt failed. Update address or choose pickup at https://shiptrack.io.
+orig_001,delivery_0031,Shipment scheduled. Track progress at https://parcel.example.net. Signature may be required.
+orig_001,delivery_0032,Delivery attempt failed. Update address or choose pickup at http://delivery.example.com.
+orig_001,delivery_0033,Your package is arriving today between 09:00–13:00. Manage options: http://track-now.org
+orig_001,delivery_0034,Shipment scheduled. Track progress at http://delivery.example.com. Signature may be required.
+orig_001,delivery_0035,Delivery attempt failed. Update address or choose pickup at https://parcel.example.net.
+orig_001,delivery_0036,Your package is arriving today between 20:15–10:00. Manage options: http://delivery.example.com
+orig_001,delivery_0037,Delivery attempt failed. Update address or choose pickup at https://parcel.example.net.
+orig_001,delivery_0038,Your package is arriving today between 20:00–19:30. Manage options: https://parcel.example.net
+orig_001,delivery_0039,Customs cleared. Estimated delivery tomorrow. Track at http://track-now.org
+orig_001,delivery_0040,Customs cleared. Estimated delivery tomorrow. Track at https://parcel.example.net
+orig_001,retail_0001,New arrivals: jackets starting at $85. Visit https://store.example.org
+orig_001,retail_0002,Weekend flash sale ends Sunday midnight. Browse https://shop.example.com
+orig_001,retail_0003,New arrivals: smartwatches starting at $130. Visit http://deals.example.net
+orig_001,retail_0004,Members only: extra 18% off clearance. Online only: https://fashion.example.app
+orig_001,retail_0005,Weekend flash sale ends Sunday noon. Browse https://outlet.example.co
+orig_001,retail_0006,Weekend flash sale ends Sunday noon. Browse http://deals.example.net
+orig_001,retail_0007,New arrivals: dresses starting at $130. Visit https://shop.example.com
+orig_001,retail_0008,Weekend flash sale ends Sunday noon. Browse http://deals.example.net
+orig_001,retail_0009,Cart reminder: complete your purchase and save 6% with code SAVE15 at http://deals.example.net
+orig_001,retail_0010,Weekend flash sale ends Sunday midnight. Browse https://shop.example.com
+orig_001,retail_0011,Members only: extra 14% off clearance. Online only: https://outlet.example.co
+orig_001,retail_0012,Members only: extra 17% off clearance. Online only: http://deals.example.net
+orig_001,retail_0013,Weekend flash sale ends Sunday noon. Browse https://store.example.org
+orig_001,retail_0014,Cart reminder: complete your purchase and save 15% with code SAVE11 at https://store.example.org
+orig_001,retail_0015,Weekend flash sale ends Sunday midnight. Browse https://outlet.example.co
+orig_001,retail_0016,Weekend flash sale ends Sunday noon. Browse http://deals.example.net
+orig_001,retail_0017,Members only: extra 11% off clearance. Online only: https://outlet.example.co
+orig_001,retail_0018,Weekend flash sale ends Sunday midnight. Browse https://outlet.example.co
+orig_001,retail_0019,Cart reminder: complete your purchase and save 12% with code SAVE15 at https://store.example.org
+orig_001,retail_0020,Weekend flash sale ends Sunday midnight. Browse https://store.example.org
+orig_001,retail_0021,New arrivals: headphones starting at $150. Visit https://fashion.example.app
+orig_001,retail_0022,Members only: extra 7% off clearance. Online only: https://store.example.org
+orig_001,retail_0023,Members only: extra 12% off clearance. Online only: https://store.example.org
+orig_001,retail_0024,Limited time offer: 11% off jackets. Shop now at https://store.example.org
+orig_001,retail_0025,Cart reminder: complete your purchase and save 14% with code SAVE6 at https://outlet.example.co
+orig_001,retail_0026,Cart reminder: complete your purchase and save 15% with code SAVE14 at https://store.example.org
+orig_001,retail_0027,Cart reminder: complete your purchase and save 12% with code SAVE11 at https://store.example.org
+orig_001,retail_0028,Limited time offer: 10% off laptops. Shop now at https://shop.example.com
+orig_001,retail_0029,Cart reminder: complete your purchase and save 8% with code SAVE7 at https://fashion.example.app
+orig_001,retail_0030,Cart reminder: complete your purchase and save 5% with code SAVE13 at https://store.example.org
+orig_001,retail_0031,New arrivals: backpacks starting at $53. Visit https://outlet.example.co
+orig_001,retail_0032,Weekend flash sale ends Sunday midnight. Browse https://outlet.example.co
+orig_001,retail_0033,Weekend flash sale ends Sunday midnight. Browse https://fashion.example.app
+orig_001,retail_0034,Cart reminder: complete your purchase and save 7% with code SAVE12 at https://outlet.example.co
+orig_001,retail_0035,Members only: extra 12% off clearance. Online only: http://deals.example.net
+orig_001,retail_0036,Weekend flash sale ends Sunday midnight. Browse https://store.example.org
+orig_001,retail_0037,Members only: extra 19% off clearance. Online only: https://shop.example.com
+orig_001,retail_0038,Members only: extra 12% off clearance. Online only: http://deals.example.net
+orig_001,retail_0039,Members only: extra 15% off clearance. Online only: https://fashion.example.app
+orig_001,retail_0040,New arrivals: sneakers starting at $57. Visit https://store.example.org
+orig_001,loan_0001,"Need funds fast? 24‑hour decision, no hidden fees. Begin at https://offers.creditfast.io"
+orig_001,loan_0002,You’re pre‑approved for a loan up to $5000. Check options: https://loansecure.app
+orig_001,loan_0003,"Need funds fast? 24‑hour decision, no hidden fees. Begin at http://funds-now.net/apply"
+orig_001,loan_0004,Personalized loan rates available. See your rate without impact to credit at https://loansecure.app
+orig_001,loan_0005,"Need funds fast? 24‑hour decision, no hidden fees. Begin at https://apply-loan.com"
+orig_001,loan_0006,You’re pre‑approved for a loan up to $15000. Check options: https://loansecure.app
+orig_001,loan_0007,Personalized loan rates available. See your rate without impact to credit at https://apply-loan.com
+orig_001,loan_0008,Personalized loan rates available. See your rate without impact to credit at https://loansecure.app
+orig_001,loan_0009,"Need funds fast? 24‑hour decision, no hidden fees. Begin at https://apply-loan.com"
+orig_001,loan_0010,Special loan offer ends Friday. Fixed APR from 6.5%. Start now: https://loansecure.app
+orig_001,loan_0011,"Need funds fast? 24‑hour decision, no hidden fees. Begin at https://fastcash.example.org"
+orig_001,loan_0012,Personalized loan rates available. See your rate without impact to credit at https://fastcash.example.org
+orig_001,loan_0013,You’re pre‑approved for a loan up to $15000. Check options: https://offers.creditfast.io
+orig_001,loan_0014,Special loan offer ends Friday. Fixed APR from 6.5%. Start now: https://loansecure.app
+orig_001,loan_0015,Low interest loan offer. Quick approval. Apply at https://loansecure.app
+orig_001,loan_0016,Special loan offer ends Friday. Fixed APR from 7.2%. Start now: https://loansecure.app
+orig_001,loan_0017,You’re pre‑approved for a loan up to $15000. Check options: https://offers.creditfast.io
+orig_001,loan_0018,Personalized loan rates available. See your rate without impact to credit at https://fastcash.example.org
+orig_001,loan_0019,Low interest loan offer. Quick approval. Apply at https://loansecure.app
+orig_001,loan_0020,Personalized loan rates available. See your rate without impact to credit at https://fastcash.example.org
+orig_001,loan_0021,Low interest loan offer. Quick approval. Apply at https://apply-loan.com
+orig_001,loan_0022,"Need funds fast? 24‑hour decision, no hidden fees. Begin at https://offers.creditfast.io"
+orig_001,loan_0023,"Need funds fast? 24‑hour decision, no hidden fees. Begin at https://offers.creditfast.io"
+orig_001,loan_0024,Low interest loan offer. Quick approval. Apply at http://funds-now.net/apply
+orig_001,loan_0025,"Need funds fast? 24‑hour decision, no hidden fees. Begin at http://funds-now.net/apply"
+orig_001,loan_0026,You’re pre‑approved for a loan up to $15000. Check options: http://funds-now.net/apply
+orig_001,loan_0027,Special loan offer ends Friday. Fixed APR from 6.5%. Start now: http://funds-now.net/apply
+orig_001,loan_0028,"Need funds fast? 24‑hour decision, no hidden fees. Begin at http://funds-now.net/apply"
+orig_001,loan_0029,Low interest loan offer. Quick approval. Apply at https://loansecure.app
+orig_001,loan_0030,Low interest loan offer. Quick approval. Apply at https://fastcash.example.org
+orig_001,loan_0031,Low interest loan offer. Quick approval. Apply at http://funds-now.net/apply
+orig_001,loan_0032,You’re pre‑approved for a loan up to $5000. Check options: https://apply-loan.com
+orig_001,loan_0033,Low interest loan offer. Quick approval. Apply at https://offers.creditfast.io
+orig_001,loan_0034,You’re pre‑approved for a loan up to $5000. Check options: https://fastcash.example.org
+orig_001,loan_0035,You’re pre‑approved for a loan up to $7500. Check options: https://offers.creditfast.io
+orig_001,loan_0036,"Need funds fast? 24‑hour decision, no hidden fees. Begin at https://apply-loan.com"
+orig_001,loan_0037,Personalized loan rates available. See your rate without impact to credit at https://offers.creditfast.io
+orig_001,loan_0038,"Need funds fast? 24‑hour decision, no hidden fees. Begin at http://funds-now.net/apply"
+orig_001,loan_0039,Special loan offer ends Friday. Fixed APR from 5.9%. Start now: https://fastcash.example.org
+orig_001,loan_0040,Personalized loan rates available. See your rate without impact to credit at https://apply-loan.com
+orig_001,flight_0001,Check‑in open for your SunFly flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0002,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0003,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0004,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0005,Gate change: Flight 930 now departs from gate C4 at CDG.
+orig_001,flight_0006,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0007,Check‑in open for your SunFly flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0008,Boarding begins in 30 minutes at gate D9. Please have your passport ready.
+orig_001,flight_0009,Reminder: Download your mobile boarding pass for SunFly at https://m.fly-app.io
+orig_001,flight_0010,Gate change: Flight 894 now departs from gate E11 at FRA.
+orig_001,flight_0011,Boarding begins in 30 minutes at gate F16. Please have your passport ready.
+orig_001,flight_0012,Delay update: Flight 980 now departs at 16:45. See details in app.
+orig_001,flight_0013,Delay update: Flight 682 now departs at 16:00. See details in app.
+orig_001,flight_0014,Reminder: Download your mobile boarding pass for SkyWays at https://m.fly-app.io
+orig_001,flight_0015,Gate change: Flight 740 now departs from gate F17 at CDG.
+orig_001,flight_0016,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0017,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0018,Gate change: Flight 277 now departs from gate B4 at JFK.
+orig_001,flight_0019,Gate change: Flight 102 now departs from gate D16 at FRA.
+orig_001,flight_0020,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0021,Reminder: Download your mobile boarding pass for CloudAir at https://m.fly-app.io
+orig_001,flight_0022,Delay update: Flight 133 now departs at 10:30. See details in app.
+orig_001,flight_0023,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0024,Delay update: Flight 819 now departs at 20:45. See details in app.
+orig_001,flight_0025,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0026,Delay update: Flight 906 now departs at 19:15. See details in app.
+orig_001,flight_0027,Boarding begins in 30 minutes at gate G2. Please have your passport ready.
+orig_001,flight_0028,Reminder: Download your mobile boarding pass for AeroNova at https://m.fly-app.io
+orig_001,flight_0029,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0030,Gate change: Flight 372 now departs from gate E21 at JFK.
+orig_001,flight_0031,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0032,Delay update: Flight 709 now departs at 18:30. See details in app.
+orig_001,flight_0033,Boarding begins in 30 minutes at gate C18. Please have your passport ready.
+orig_001,flight_0034,Boarding begins in 30 minutes at gate E10. Please have your passport ready.
+orig_001,flight_0035,Delay update: Flight 816 now departs at 13:30. See details in app.
+orig_001,flight_0036,Reminder: Download your mobile boarding pass for SunFly at https://m.fly-app.io
+orig_001,flight_0037,Boarding begins in 30 minutes at gate F16. Please have your passport ready.
+orig_001,flight_0038,Check‑in open for your SunFly flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0039,Check‑in open for your CloudAir flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0040,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com

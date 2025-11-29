@@ -1,0 +1,201 @@
+originator_id,message_id,raw_text
+orig_001,bank_0001,Use code 909090 to complete your login at https://secure.bank.example.com Thanks.
+orig_001,bank_0002,One-time password 654321 for your account. Never share this code.
+orig_001,bank_0003,"Hi, Use code 909090 to complete your login at http://secure.bank.example.com Thanks."
+orig_001,bank_0004,"Dear customer, Security code 778899 to confirm your transaction at bank.example.com"
+orig_001,bank_0005,Your OTP is 123456. Do not share. visit https://bank.example.com/login
+orig_001,bank_0006,"Hello, Your OTP is 123456. Do not share. Visit http://bank.example.com/login Thanks."
+orig_001,bank_0007,Use code 909090 to complete your login at https://secure.bank.example.com Thanks.
+orig_001,bank_0008,OTP 442211 valid for 10 minutes. Use it to sign in.
+orig_001,bank_0009,"Dear customer, Security code 778899 to confirm your transaction at bank.example.com"
+orig_001,bank_0010,"Hello, Your OTP is 123456. Do not share. Visit http://bank.example.com/login Thanks."
+orig_001,bank_0011,One-time password 654321 for your account. Never share this code.
+orig_001,bank_0012,OTP 442211 valid for 10 minutes. Use it to sign in.
+orig_001,bank_0013,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0014,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0015,Use code 909090 to complete your login at https://secure.bank.example.com Thanks.
+orig_001,bank_0016,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0017,OTP 442211 valid for 10 minutes. Use it to sign in.
+orig_001,bank_0018,OTP 442211 valid for 10 minutes. Use it to sign in.
+orig_001,bank_0019,"Dear customer, Security code 778899 to confirm your transaction at bank.example.com"
+orig_001,bank_0020,Your OTP is 123456. Do not share. visit https://bank.example.com/login
+orig_001,bank_0021,"Hi, Use code 909090 to complete your login at http://secure.bank.example.com Thanks."
+orig_001,bank_0022,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0023,Use code 909090 to complete your login at https://secure.bank.example.com Thanks.
+orig_001,bank_0024,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0025,"Dear customer, Security code 778899 to confirm your transaction at bank.example.com"
+orig_001,bank_0026,OTP 442211 valid for 10 minutes. Use it to sign in.
+orig_001,bank_0027,One-time password 654321 for your account. Never share this code.
+orig_001,bank_0028,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0029,Your OTP is 123456. Do not share. visit https://bank.example.com/login
+orig_001,bank_0030,One-time password 654321 for your account. Never share this code.
+orig_001,bank_0031,"Dear customer, Security code 778899 to confirm your transaction at bank.example.com"
+orig_001,bank_0032,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0033,One-time password 654321 for your account. Never share this code.
+orig_001,bank_0034,"Hi, Your OTP is 123456. Do not share. Visit https://bank.example.com/login Thanks."
+orig_001,bank_0035,Use code 909090 to complete your login at https://secure.bank.example.com Thanks.
+orig_001,bank_0036,"Dear customer, Security code 778899 to confirm your transaction at bank.example.com"
+orig_001,bank_0037,"Hi, Use code 909090 to complete your login at http://secure.bank.example.com Thanks."
+orig_001,bank_0038,OTP 442211 valid for 10 minutes. Use it to sign in.
+orig_001,bank_0039,"Hello, Your OTP is 123456. Do not share. Visit http://bank.example.com/login Thanks."
+orig_001,bank_0040,OTP 442211 valid for 10 minutes. Use it to sign in.
+orig_001,delivery_0041,Shipment scheduled. track progress at http://status.shipco.com/track Thanks.
+orig_001,delivery_0042,"Dear customer, Order on the way!! Change delivery window in your portal Thank you."
+orig_001,delivery_0043,Parcel out for delivery. Reschedule at www.shipco.com/reschedule Thanks.
+orig_001,delivery_0044,Shipment scheduled. track progress at http://status.shipco.com/track Thanks.
+orig_001,delivery_0045,"Dear customer, Order on the way!! Change delivery window in your portal Thank you."
+orig_001,delivery_0046,"Hi, Your package is arriving tmrw. Track at https://track.shipco.com Thanks."
+orig_001,delivery_0047,"Hi, Delivery update: courier will attempt delivery tdy 2–4pm Thank you."
+orig_001,delivery_0048,"Hi, Your package is arriving tmrw. Track at https://track.shipco.com Thanks."
+orig_001,delivery_0049,"Hello, Your package is arriving tomorrow. Track at http://track.shipco.com"
+orig_001,delivery_0050,Order on the way! Change delivery window in your portal Thank you.
+orig_001,delivery_0051,Order on the way! Change delivery window in your portal Thank you.
+orig_001,delivery_0052,"Hi, Delivery update: courier will attempt delivery tdy 2–4pm Thank you."
+orig_001,delivery_0053,"Hello, Shipment scheduled. Track progress at http://status.shipco.com/track Thanks."
+orig_001,delivery_0054,Parcel out for delivery. Reschedule at www.shipco.com/reschedule Thanks.
+orig_001,delivery_0055,"Hello, Shipment scheduled. Track progress at http://status.shipco.com/track Thanks."
+orig_001,delivery_0056,Parcel out for delivery. Reschedule at www.shipco.com/reschedule Thanks.
+orig_001,delivery_0057,"Dear customer, Delivery update: courier will attempt delivery today 2–4pm Thank you."
+orig_001,delivery_0058,"Hello, Your package is arriving tomorrow. Track at http://track.shipco.com"
+orig_001,delivery_0059,"Hi, Your package is arriving tmrw. Track at https://track.shipco.com Thanks."
+orig_001,delivery_0060,Order on the way! Change delivery window in your portal Thank you.
+orig_001,delivery_0061,"Dear customer, Order on the way!! Change delivery window in your portal Thank you."
+orig_001,delivery_0062,"Hi, Your package is arriving tomorrow. track at https://track.shipco.com Regards."
+orig_001,delivery_0063,"Hello, Your package is arriving tomorrow. Track at https://track.shipco.com Thanks."
+orig_001,delivery_0064,"Hi, Your package is arriving tomorrow. track at https://track.shipco.com Regards."
+orig_001,delivery_0065,"Hi, Your package is arriving tmrw. Track at https://track.shipco.com Thanks."
+orig_001,delivery_0066,Shipment scheduled. track progress at http://status.shipco.com/track Thanks.
+orig_001,delivery_0067,"Hi, Your package is arriving tmrw. Track at https://track.shipco.com Thanks."
+orig_001,delivery_0068,Shipment scheduled. track progress at http://status.shipco.com/track Thanks.
+orig_001,delivery_0069,Parcel out for delivery. Reschedule at www.shipco.com/reschedule Thanks.
+orig_001,delivery_0070,"Hello, Shipment scheduled. Track progress at http://status.shipco.com/track Thanks."
+orig_001,delivery_0071,"Hi, Your package is arriving tomorrow. track at https://track.shipco.com Regards."
+orig_001,delivery_0072,Parcel out for delivery. Reschedule at www.shipco.com/reschedule Thanks.
+orig_001,delivery_0073,Parcel out for delivery. Reschedule at www.shipco.com/reschedule Thanks.
+orig_001,delivery_0074,"Hello, Shipment scheduled. Track progress at http://status.shipco.com/track Thanks."
+orig_001,delivery_0075,"Dear customer, Order on the way!! Change delivery window in your portal Thank you."
+orig_001,delivery_0076,Order on the way! Change delivery window in your portal Thank you.
+orig_001,delivery_0077,"Hi, Delivery update: courier will attempt delivery tdy 2–4pm Thank you."
+orig_001,delivery_0078,Order on the way! Change delivery window in your portal Thank you.
+orig_001,delivery_0079,"Hello, Your package is arriving tomorrow. Track at https://track.shipco.com Thanks."
+orig_001,delivery_0080,Shipment scheduled. track progress at http://status.shipco.com/track Thanks.
+orig_001,retail_0081,"Hello, Flash sale!! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0082,"Hello, Limited time offer: 25% off shoes. Shop now at http://shop-deals.com"
+orig_001,retail_0083,New arrivals: jackets starting at $49. Visit www.shop-deals.com/jackets Thank you.
+orig_001,retail_0084,"Hi, Members only: extra 10% off clearance. Online & in-store. Thank you."
+orig_001,retail_0085,"Hello, Limited time offer: 25% off shoes. Shop now at http://shop-deals.com"
+orig_001,retail_0086,Limited time offer: 25% off shoes. Shop now at https://shop-deals.com Thank you.
+orig_001,retail_0087,New arrivals: jackets starting at $49. Visit www.shop-deals.com/jackets Thank you.
+orig_001,retail_0088,"Hi, New arrivals: jackets starting at $49. visit www.shop-deals.com/jackets"
+orig_001,retail_0089,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0090,"Hello, Limited time offer: 25% off shoes. Shop now at http://shop-deals.com"
+orig_001,retail_0091,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0092,Limited time offer: 25% off shoes. Shop now at https://shop-deals.com Thank you.
+orig_001,retail_0093,Limited time offer: 25% off shoes. Shop now at https://shop-deals.com Thank you.
+orig_001,retail_0094,"Hi, Members only: extra 10% off clearance. Online & in-store. Thank you."
+orig_001,retail_0095,Limited time offer: 25% off shoes. Shop now at https://shop-deals.com Thank you.
+orig_001,retail_0096,"Hello, Flash sale!! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0097,"Hello, Flash sale!! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0098,"Hi, Members only: extra 10% off clearance. Online & in-store. Thank you."
+orig_001,retail_0099,"Hello, Flash sale!! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0100,"Hi, New arrivals: jackets starting at $49. visit www.shop-deals.com/jackets"
+orig_001,retail_0101,"Hello, Exclusive promo code SAVE20 at checkout, valid this week. Thanks."
+orig_001,retail_0102,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0103,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0104,"Hi, New arrivals: jackets starting at $49. visit www.shop-deals.com/jackets"
+orig_001,retail_0105,"Hello, Exclusive promo code SAVE20 at checkout, valid this week. Thanks."
+orig_001,retail_0106,New arrivals: jackets starting at $49. Visit www.shop-deals.com/jackets Thank you.
+orig_001,retail_0107,"Hi, Members only: extra 10% off clearance. Online & in-store. Thank you."
+orig_001,retail_0108,"Hi, Members only: extra 10% off clearance. Online & in-store. Thank you."
+orig_001,retail_0109,Limited time offer: 25% off shoes. Shop now at https://shop-deals.com Thank you.
+orig_001,retail_0110,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0111,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0112,Limited time offer: 25% off shoes. Shop now at https://shop-deals.com Thank you.
+orig_001,retail_0113,New arrivals: jackets starting at $49. Visit www.shop-deals.com/jackets Thank you.
+orig_001,retail_0114,"Hello, Limited time offer: 25% off shoes. Shop now at http://shop-deals.com"
+orig_001,retail_0115,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0116,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,retail_0117,"Hello, Limited time offer: 25% off shoes. Shop now at http://shop-deals.com"
+orig_001,retail_0118,Limited time offer: 25% off shoes. Shop now at https://shop-deals.com Thank you.
+orig_001,retail_0119,"Hello, Limited time offer: 25% off shoes. Shop now at http://shop-deals.com"
+orig_001,retail_0120,"Hi, Flash sale! Buy 1 get 1 free on shirts. Today only. Regards."
+orig_001,loan_0121,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0122,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0123,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0124,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0125,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0126,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0127,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0128,"Hi, Refinance your loan with better rates. Apply in minutes. Thank you."
+orig_001,loan_0129,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0130,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0131,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0132,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0133,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0134,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0135,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0136,"Hi, Refinance your loan with better rates. Apply in minutes. Thank you."
+orig_001,loan_0137,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0138,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0139,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0140,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0141,"Hi, Get funds fast. Flexible repayment. Learn more now. Regards."
+orig_001,loan_0142,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0143,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0144,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0145,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0146,"Hi, Refinance your loan with better rates. Apply in minutes. Thank you."
+orig_001,loan_0147,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0148,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0149,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0150,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0151,"Hi, Get funds fast. Flexible repayment. Learn more now. Regards."
+orig_001,loan_0152,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0153,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0154,"Hi, Get funds fast. Flexible repayment. Learn more now. Regards."
+orig_001,loan_0155,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0156,"You’re pre-approved for a loan up to $10,000. Check your options."
+orig_001,loan_0157,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0158,"Hello, Low interest loan offer. Quick approval, no collateral required."
+orig_001,loan_0159,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,loan_0160,"Dear customer, Special loan offer ends Friday. See terms online. Thanks."
+orig_001,flight_0001,Check‑in open for your SunFly flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0002,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0003,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0004,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0005,Gate change: Flight 930 now departs from gate C4 at CDG.
+orig_001,flight_0006,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0007,Check‑in open for your SunFly flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0008,Boarding begins in 30 minutes at gate D9. Please have your passport ready.
+orig_001,flight_0009,Reminder: Download your mobile boarding pass for SunFly at https://m.fly-app.io
+orig_001,flight_0010,Gate change: Flight 894 now departs from gate E11 at FRA.
+orig_001,flight_0011,Boarding begins in 30 minutes at gate F16. Please have your passport ready.
+orig_001,flight_0012,Delay update: Flight 980 now departs at 16:45. See details in app.
+orig_001,flight_0013,Delay update: Flight 682 now departs at 16:00. See details in app.
+orig_001,flight_0014,Reminder: Download your mobile boarding pass for SkyWays at https://m.fly-app.io
+orig_001,flight_0015,Gate change: Flight 740 now departs from gate F17 at CDG.
+orig_001,flight_0016,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0017,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0018,Gate change: Flight 277 now departs from gate B4 at JFK.
+orig_001,flight_0019,Gate change: Flight 102 now departs from gate D16 at FRA.
+orig_001,flight_0020,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0021,Reminder: Download your mobile boarding pass for CloudAir at https://m.fly-app.io
+orig_001,flight_0022,Delay update: Flight 133 now departs at 10:30. See details in app.
+orig_001,flight_0023,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0024,Delay update: Flight 819 now departs at 20:45. See details in app.
+orig_001,flight_0025,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0026,Delay update: Flight 906 now departs at 19:15. See details in app.
+orig_001,flight_0027,Boarding begins in 30 minutes at gate G2. Please have your passport ready.
+orig_001,flight_0028,Reminder: Download your mobile boarding pass for AeroNova at https://m.fly-app.io
+orig_001,flight_0029,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
+orig_001,flight_0030,Gate change: Flight 372 now departs from gate E21 at JFK.
+orig_001,flight_0031,Check‑in open for your AeroNova flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0032,Delay update: Flight 709 now departs at 18:30. See details in app.
+orig_001,flight_0033,Boarding begins in 30 minutes at gate C18. Please have your passport ready.
+orig_001,flight_0034,Boarding begins in 30 minutes at gate E10. Please have your passport ready.
+orig_001,flight_0035,Delay update: Flight 816 now departs at 13:30. See details in app.
+orig_001,flight_0036,Reminder: Download your mobile boarding pass for SunFly at https://m.fly-app.io
+orig_001,flight_0037,Boarding begins in 30 minutes at gate F16. Please have your passport ready.
+orig_001,flight_0038,Check‑in open for your SunFly flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0039,Check‑in open for your CloudAir flight. Add bags and select seats at https://checkin.airtravel.app
+orig_001,flight_0040,Baggage allowance: 1 cabin bag + 23kg checked. Need more? Manage at https://travel.manage-bags.com
