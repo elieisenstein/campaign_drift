@@ -1,6 +1,0 @@
-campaign_id,size,exemplar_1,exemplar_2,exemplar_3
-0,5,"{name}, low interest loan offer. quick approval, no collateral required.","{name}, refinance your loan with better rates. apply in minutes. thank you.",you’re pre-approved for a loan up to ${num}. check your options.
-1,6,your otp is {otp}. do not share. visit {url:example.com},use code {otp} to complete your login at {url:example.com} thanks.,"{name}, your otp is {otp}. do not share. visit {url:example.com} thanks."
-2,6,"{name}, flash sale! buy {num} get {num} free on shirts. today only. regards.","{name}, flash sale!! buy {num} get {num} free on shirts. today only. regards.","{name}, new arrivals: jackets starting at ${num}. visit {url:shop-deals.com}"
-3,6,"{name}, please confirm your appointment for thursday {num}:{num}. regards.","{name}, reminder: appointment tomorrow {num}:{num} at main clinic. thanks.","{name}, reminder: appointment tmrw {num}:{num} at main clinic."
-4,11,"{name}, your package is arriving tomorrow. track at {url:shipco.com} thanks.","{name}, your package is arriving tomorrow. track at {url:shipco.com} regards.","{name}, your package is arriving tomorrow. track at {url:shipco.com}"
