@@ -79,3 +79,32 @@ CENTROID_SIM_THRESHOLD = 0.6 # threshold for propagating proposed labels
 def resolve_path(prefix: str, suffix: str, data_dir: str = DATA_DIR) -> str:
     """Helper to build full paths inside DATA_DIR."""
     return os.path.join(data_dir, f"{prefix}{suffix}")
+
+
+def adaptive_hdbscan_params(
+    base_params: dict,
+    n_points: int,
+    min_cluster_frac: float = 0.01,
+    min_cluster_size_floor: int = 5,
+    min_samples_floor: int = 3,
+) -> dict:
+    """
+    Build an HDBSCAN params dict adapted to dataset size.
+
+    - base_params: default dict (e.g. HDBSCAN_STAGE1 / HDBSCAN_UNKNOWN_DEFAULT)
+    - n_points:    number of points to cluster
+    - min_cluster_frac: fraction of n_points for min_cluster_size (e.g. 0.01 = 1%)
+    """
+    if n_points <= 0:
+        return dict(base_params)
+
+    mcs = max(min_cluster_size_floor, int(min_cluster_frac * n_points))
+    ms = max(min_samples_floor, int(n_points ** 0.5))
+
+    params = dict(base_params)
+    params["min_cluster_size"] = mcs
+    # don't override if caller already set min_samples explicitly
+    params.setdefault("min_samples", ms)
+
+    return params
+
