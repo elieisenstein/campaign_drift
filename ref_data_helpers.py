@@ -60,7 +60,7 @@ def _debug_print_hdbscan_params(params: Dict[str, Any]) -> None:
 
 def build_reference_embeddings_from_csv(
     csv_path: str,
-    art_dir: str,
+    data_dir: str,
     prefix: str,
     text_col: str = "raw_text",
     model_path: str = r"C:/models/all-MiniLM-L6-v2",
@@ -112,7 +112,7 @@ def build_reference_embeddings_from_csv(
     )
 
     csv_path_saved, npy_path_saved = save_embeddings(
-        meta_df, X, out_dir=art_dir, prefix=prefix
+        meta_df, X, out_dir=data_dir, prefix=prefix
     )
 
     if verbose:
@@ -129,7 +129,7 @@ def _unit_normalize(X: np.ndarray) -> np.ndarray:
 
 
 def build_reference_profile(
-    art_dir: str,
+    data_dir: str,
     prefix: str,
     hdbscan_params: Optional[Dict[str, Any]] = None,
     n_nearest: int = 5,
@@ -154,7 +154,7 @@ def build_reference_profile(
         Centroids matrix, shape [num_campaigns, dim].
     """
     # Load embeddings as saved by build_reference_embeddings_from_csv / save_embeddings
-    meta, X = load_embeddings(out_dir=art_dir, prefix=prefix, encoding="utf-8")
+    meta, X = load_embeddings(out_dir=data_dir, prefix=prefix, encoding="utf-8")
 
     X = _unit_normalize(X)
 
@@ -295,7 +295,7 @@ def build_reference_profile(
 
     # Persist all artifacts in a single helper
     save_campaign_footprint(
-        out_dir=art_dir,
+        out_dir=data_dir,
         prefix=prefix,
         campaigns_df=campaigns_df,
         centroids=C,
@@ -305,7 +305,7 @@ def build_reference_profile(
     if verbose:
         print(
             f"[Stage 1] Reference build complete. "
-            f"Saved artifacts for prefix={prefix} under {art_dir}"
+            f"Saved artifacts for prefix={prefix} under {data_dir}"
         )
 
     return campaigns_df, examples_df, C
