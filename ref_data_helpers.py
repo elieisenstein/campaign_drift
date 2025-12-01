@@ -11,8 +11,8 @@ import hdbscan
 
 from sms_norm import normalize_and_hash_series, dedupe_by_hash
 from sms_embed import embed_dedup_dataframe, save_embeddings, load_embeddings
-from llm_client_openai import summarize_samples
-#from llm_client_azure_openai import summarize_samples # alternate LLM client for Azure OpenAI
+#from llm_client_openai import summarize_samples
+from llm_client_azure_openai import summarize_samples # alternate LLM client for Azure OpenAI
 from persist_utils import save_campaign_footprint
 
 

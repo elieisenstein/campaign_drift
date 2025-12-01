@@ -16,6 +16,7 @@ from typing import List, Tuple, Optional, Any
 import os
 import re
 import pathlib
+import sys
 
 # ✅ PUT THIS BLOCK RIGHT HERE (after imports, before Azure import)
 # ----------------------------------------------------------------
@@ -74,10 +75,15 @@ def _get_azure_chat_client() -> Optional[Any]:
     """Lazy import and instantiate AzureChatClient via ServiceConfig like your working example."""
     try:
         # these imports should match the module that provides ServiceConfig and AzureChatClient
+        script_dir = pathlib.Path(__file__).resolve().parent
+        if str(script_dir) not in sys.path:
+            sys.path.insert(0, str(script_dir))
+            
         from client import ServiceConfig, AzureChatClient
         cfg = ServiceConfig.load()
         return AzureChatClient(cfg)
-    except Exception:
+    except Exception as e:
+        print(f"AzureChatClient import/instantiation error: {e}")
         return None
 
 # -------------------------
@@ -148,7 +154,8 @@ if __name__ == "__main__":
         "cuenta chase {OTP}: transacciÃ³n de tarjeta de dÃ©bito de ${NUM} a {url:amazon.com} el nov {NUM}, {OTP} a las {TIME} hora del este, excede ${NUM}."
     ]
 
-    label, raw = summarize_samples(example_samples, max_words=5, model="gpt-4o-mini")
+    #label, raw = summarize_samples(example_samples, max_words=5, model="gpt-4o-mini")
+    label, raw = summarize_samples(example_samples)
 
     print("Result label:", repr(label))
     #print("\nRaw response (repr):")

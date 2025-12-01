@@ -11,7 +11,8 @@ import hdbscan
 
 from sms_norm import normalize_and_hash_series, dedupe_by_hash
 from sms_embed import embed_dedup_dataframe
-from llm_client_openai import summarize_samples
+#from llm_client_openai import summarize_samples
+from llm_client_azure_openai import summarize_samples # alternate LLM client for Azure OpenAI
 
 
 from params import (
@@ -304,8 +305,9 @@ def cluster_unknown_prototypes(
         samples = meta_df.loc[top_globals, "normalized_text"].astype(str).tolist()
 
         # LLM summarization
-        proposed_label, raw_resp = summarize_samples(samples, max_words=max_words, model="gpt-4o-mini", temperature=0.0)
-
+        #proposed_label, raw_resp = summarize_samples(samples, max_words=max_words, model="gpt-4o-mini", temperature=0.0)
+        proposed_label, raw_resp = summarize_samples(samples)
+                
         proposed_clusters.append(
             {
                 "cluster_label": int(lbl),
