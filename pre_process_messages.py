@@ -2,6 +2,7 @@ import csv
 import json
 import re
 import argparse
+import os
 
 
 def normalize(s: str) -> str:
@@ -35,12 +36,19 @@ def get_source_and_fields(raw: str):
 
 def extract_messages(
     input_path: str,
-    output_path: str,
+    output_dir: str,
     originator: str,
     max_rows: int = 1_000_000,
     dilute_factor: int = 10,
 ):
     """Extract messages from CSV and write filtered rows to a new CSV."""
+    
+    # Create directory if not exists
+    
+    os.makedirs(os.path.dirname(output_dir), exist_ok=True)
+    
+    output_path = os.path.join(output_dir, f"ref_{originator}.csv")
+    
     with open(input_path, newline="", encoding="utf-8") as fin, \
          open(output_path, "w", newline="", encoding="utf-8") as fout:
 
@@ -75,7 +83,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--originator", required=True, help="Originator ID to filter")
     parser.add_argument("--input", required=True, help="Input CSV path")
-    parser.add_argument("--output", required=True, help="Output CSV path")
+    parser.add_argument("--output_dir", required=True, help="Directory to place output file")
     parser.add_argument("--max_rows", type=int, default=1_000_000, help="Max number of rows to process")
     parser.add_argument("--dilute", type=int, default=10, help="Take every Nth matching row")
 
@@ -83,7 +91,7 @@ if __name__ == "__main__":
 
     extract_messages(
         input_path=args.input,
-        output_path=args.output,
+        output_dir=args.output_dir,
         originator=args.originator,
         max_rows=args.max_rows,
         dilute_factor=args.dilute
