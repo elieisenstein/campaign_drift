@@ -134,6 +134,7 @@ def build_reference_profile(
     hdbscan_params: Optional[Dict[str, Any]] = None,
     n_nearest: int = 5,
     verbose: bool = True,
+    write_outputs: bool = True,
 ) -> Tuple[pd.DataFrame, pd.DataFrame, np.ndarray]:
     """
     Stage 1 (part 2):
@@ -294,18 +295,76 @@ def build_reference_profile(
 
 
     # Persist all artifacts in a single helper
-    save_campaign_footprint(
-        out_dir=data_dir,
-        prefix=prefix,
-        campaigns_df=campaigns_df,
-        centroids=C,
-        campaign_examples_df=examples_df,
-    )
-
-    if verbose:
-        print(
-            f"[Stage 1] Reference build complete. "
-            f"Saved artifacts for prefix={prefix} under {data_dir}"
+    if write_outputs:
+        save_campaign_footprint(
+            out_dir=data_dir,
+            prefix=prefix,
+            campaigns_df=campaigns_df,
+            centroids=C,
+            campaign_examples_df=examples_df,
         )
 
+        if verbose:
+            print(
+                f"[Stage 1] Reference build complete. "
+                f"Saved artifacts for prefix={prefix} under {data_dir}"
+            )
+        else:
+            if verbose:
+                print(
+                    f"[Stage 1] Reference build complete for prefix={prefix}. "
+                    f"artifacts NOT saved for prefix={prefix} under {data_dir}"
+                )
+
     return campaigns_df, examples_df, C
+
+def export_campaign_names_csv(
+    campaigns_df: pd.DataFrame,
+    out_dir: str,
+    originator: str,
+    filename: str | None = None,
+) -> str:
+    """
+    Save only the campaign names for a single originator to a CSV.
+
+    Parameters
+    ----------
+    campaigns_df : pd.DataFrame
+        The campaigns_df returned by build_reference_profile.
+        Assumes it already corresponds to a single originator.
+    out_dir : str
+        Directory where the CSV will be written.
+    originator : str
+        Originator identifier, used in default filename.
+        e.g. "ORIGINATOR_24273".
+    filename : str, optional
+        If provided, use this filename instead of the default
+        `<originator>_campaign_names.csv`.
+
+    Returns
+    -------
+    str
+        The full path of the written CSV.
+    """
+    from pathlib import Path
+
+    out_path = Path(out_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+
+    if filename is None:
+        # Default: ORIGINATOR_campaign_names.csv
+        filename = f"{originator}_campaign_names.csv"
+
+    csv_path = out_path / filename
+
+    # Keep only the campaign_name column, unique & non-empty
+    (
+        campaigns_df["campaign_name"]
+        .dropna()
+        .drop_duplicates()
+        .to_frame("campaign_name")
+        .to_csv(csv_path, index=False, encoding="utf-8")
+    )
+
+    print(f"[Stage 1] Saved campaign-name CSV to: {csv_path}")
+    return str(csv_path)
