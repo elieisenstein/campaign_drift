@@ -174,6 +174,41 @@ def build_reference_profile(
     is_valid = labels != -1
     labels_valid = labels[is_valid]
     unique_clusters = sorted(set(int(l) for l in labels_valid))
+    
+    # ------------------------------------------------------
+    # If HDBSCAN found NO clusters (all noise), bail out early
+    # ------------------------------------------------------
+    if len(unique_clusters) == 0:
+        if verbose:
+            print(
+                "[Stage 1] WARNING: no clusters found for "
+                f"prefix={prefix} (all prototypes are noise)."
+            )
+
+        # Empty centroid matrix: 0 x dim
+        # If you don't have X in scope here yet, you can just use 0x0,
+        # it won't be used downstream in your current Stage 1 flow.
+        C = np.zeros((0, 0), dtype=np.float32)
+
+        # Minimal empty DataFrames — good enough for export_campaign_names_csv
+        campaigns_df = pd.DataFrame(columns=["campaign_name"])
+        examples_df = pd.DataFrame(columns=["campaign_name"])
+
+        # Optional: if you don't want to write any footprint artifacts
+        # in this case, just skip save_campaign_footprint entirely.
+        # If you *do* want to persist an empty footprint, you can add:
+        #
+        # if write_outputs:
+        #     save_campaign_footprint(
+        #         out_dir=data_dir,
+        #         prefix=prefix,
+        #         campaigns_df=campaigns_df,
+        #         centroids=C,
+        #         campaign_examples_df=examples_df,
+        #     )
+
+        return campaigns_df, examples_df, C
+
 
     if verbose:
         n_total = len(labels)
@@ -318,6 +353,9 @@ def build_reference_profile(
 
     return campaigns_df, examples_df, C
 
+from pathlib import Path
+import pandas as pd
+
 def export_campaign_names_csv(
     campaigns_df: pd.DataFrame,
     out_dir: str,
@@ -325,39 +363,35 @@ def export_campaign_names_csv(
     filename: str | None = None,
 ) -> str:
     """
-    Save only the campaign names for a single originator to a CSV.
+    Save campaign names for an originator to a CSV.
 
-    Parameters
-    ----------
-    campaigns_df : pd.DataFrame
-        The campaigns_df returned by build_reference_profile.
-        Assumes it already corresponds to a single originator.
-    out_dir : str
-        Directory where the CSV will be written.
-    originator : str
-        Originator identifier, used in default filename.
-        e.g. "ORIGINATOR_24273".
-    filename : str, optional
-        If provided, use this filename instead of the default
-        `<originator>_campaign_names.csv`.
+    Behavior:
+    - If campaigns_df is empty: writes a CSV with only the header 'campaign_name'.
+    - Otherwise: extracts unique campaign names and writes them.
 
-    Returns
-    -------
-    str
-        The full path of the written CSV.
+    Returns path to CSV.
     """
-    from pathlib import Path
-
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
 
     if filename is None:
-        # Default: ORIGINATOR_campaign_names.csv
         filename = f"{originator}_campaign_names.csv"
 
     csv_path = out_path / filename
 
-    # Keep only the campaign_name column, unique & non-empty
+    # -----------------------------------------------------------
+    # Case 1: no campaigns found → write an EMPTY CSV with header
+    # -----------------------------------------------------------
+    if campaigns_df.empty:
+        pd.DataFrame(columns=["campaign_name"]).to_csv(
+            csv_path, index=False, encoding="utf-8"
+        )
+        print(f"[Stage 1] No campaigns found. Wrote EMPTY CSV: {csv_path}")
+        return str(csv_path)
+
+    # -----------------------------------------------------------
+    # Case 2: normal campaigns
+    # -----------------------------------------------------------
     (
         campaigns_df["campaign_name"]
         .dropna()
@@ -368,3 +402,4 @@ def export_campaign_names_csv(
 
     print(f"[Stage 1] Saved campaign-name CSV to: {csv_path}")
     return str(csv_path)
+
