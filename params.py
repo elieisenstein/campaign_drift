@@ -11,6 +11,9 @@ Includes:
 
 import os
 
+
+
+
 # ----------------------------------------------------------
 # Laptop ID (set once in the main notebook)
 # ----------------------------------------------------------
@@ -19,8 +22,8 @@ LAPTOP_ID = os.getenv("LAPTOP_ID", "LAPTOP_A")
 # ----------------------------------------------------------
 # Base directories
 # ----------------------------------------------------------
-DATA_DIR = "./data"
-LOCAL_MODEL = r"C:/models/all-MiniLM-L6-v2"
+DATA_DIR = "./data/stage1"
+LOCAL_MODEL = "./models/all-MiniLM-L6-v2"
 
 # ----------------------------------------------------------
 # File prefixes (Stage-1)
