@@ -7,6 +7,7 @@ import pandas as pd
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import scrolledtext
+import tkinter.font as tkfont
 
 # -------------------------------------------------------------------
 # CONFIG
@@ -79,10 +80,7 @@ def load_originators(df_campaigns: pd.DataFrame) -> List[str]:
 
 # ---------- 1a & 1b from onboarding_names.csv ----------
 def load_onboarding_names_for_originator(df_onboarding: pd.DataFrame, originator: str) -> List[str]:
-    """
-    1a: All onboarding_name values in onboarding_names.csv
-    for the chosen originator (business_number).
-    """
+    """1a: onboarding_name values for the chosen originator."""
     df_sub = df_onboarding[df_onboarding[BUSINESS_NUMBER_COL].astype(str) == str(originator)]
     if df_sub.empty:
         return [f"[No onboarding rows found for originator {originator}]"]
@@ -92,10 +90,7 @@ def load_onboarding_names_for_originator(df_onboarding: pd.DataFrame, originator
 
 
 def load_onboarding_campaign_names_for_originator(df_onboarding: pd.DataFrame, originator: str) -> List[str]:
-    """
-    1b: All campaign_name values in onboarding_names.csv
-    for the chosen originator (business_number).
-    """
+    """1b: campaign_name values for the chosen originator."""
     df_sub = df_onboarding[df_onboarding[BUSINESS_NUMBER_COL].astype(str) == str(originator)]
     if df_sub.empty:
         return [f"[No onboarding rows found for originator {originator}]"]
@@ -160,6 +155,18 @@ class CampaignDriftApp:
         self.root.title("Campaign Drift Viewer")
         self.root.geometry("1200x800")
 
+        # -----------------------------
+        # Fonts: headers 16, content 14
+        # -----------------------------
+        ui_font = tkfont.nametofont("TkDefaultFont")
+        ui_font.configure(size=14)
+
+        text_font = tkfont.nametofont("TkTextFont")
+        text_font.configure(size=14)
+
+        self.content_font = tkfont.Font(family="Arial", size=14)
+        self.header_font = tkfont.Font(family="Arial", size=16, weight="bold")
+
         # Load data
         self.df_campaigns = load_campaigns_df()
         self.df_onboarding = load_onboarding_df()
@@ -180,13 +187,14 @@ class CampaignDriftApp:
         top_frame = ttk.Frame(self.root, padding=10)
         top_frame.grid(row=0, column=0, columnspan=2, sticky="ew")
 
-        ttk.Label(top_frame, text="Originator:").grid(row=0, column=0, sticky="w")
+        ttk.Label(top_frame, text="Originator:", font=self.content_font).grid(row=0, column=0, sticky="w")
         self.originator_combo = ttk.Combobox(
             top_frame,
             textvariable=self.originator_var,
             values=self.originators,
             state="readonly",
             width=20,
+            font=self.content_font,
         )
         self.originator_combo.grid(row=0, column=1, sticky="w", padx=(5, 20))
         self.originator_combo.bind("<<ComboboxSelected>>", self.on_originator_changed)
@@ -197,69 +205,114 @@ class CampaignDriftApp:
         self.root.rowconfigure(1, weight=1)
         self.root.columnconfigure(0, weight=1)
 
-        main_frame.columnconfigure(0, weight=1)
-        main_frame.columnconfigure(1, weight=1)
+        # LEFT should grow more than RIGHT when resizing
+        main_frame.columnconfigure(0, weight=1)   # left wider
+        main_frame.columnconfigure(1, weight=1)   # right narrower
         main_frame.rowconfigure(0, weight=1)
 
-        # Left column (1a, 1b)
+        # Left column (Onboarding)
         left_frame = ttk.Frame(main_frame)
         left_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 5))
         left_frame.rowconfigure(0, weight=1)
         left_frame.rowconfigure(1, weight=1)
         left_frame.columnconfigure(0, weight=1)
 
-        # Right column (2a, 2b)
+        # Right column (SMS)
         right_frame = ttk.Frame(main_frame)
         right_frame.grid(row=0, column=1, sticky="nsew", padx=(5, 0))
         right_frame.rowconfigure(0, weight=1)
         right_frame.rowconfigure(1, weight=1)
         right_frame.columnconfigure(0, weight=1)
 
-        # 1a
-        frame_1a = ttk.LabelFrame(left_frame, text="1a. Onboarding Names (onboarding_name)")
+        # 1a - Onboarding Names
+        frame_1a = ttk.LabelFrame(left_frame)
+        frame_1a.configure(labelwidget=tk.Label(
+            frame_1a,
+            text="Onboarding Names",
+            font=self.header_font,
+            fg="#0A1A66"
+        ))
         frame_1a.grid(row=0, column=0, sticky="nsew", pady=(0, 5))
         frame_1a.rowconfigure(0, weight=1)
         frame_1a.columnconfigure(0, weight=1)
 
-        self.listbox_1a = tk.Listbox(frame_1a, exportselection=False)
+        self.listbox_1a = tk.Listbox(
+            frame_1a,
+            exportselection=False,
+            font=self.content_font,
+            width=45  
+        )
         scrollbar_1a = ttk.Scrollbar(frame_1a, orient="vertical", command=self.listbox_1a.yview)
         self.listbox_1a.config(yscrollcommand=scrollbar_1a.set)
         self.listbox_1a.grid(row=0, column=0, sticky="nsew")
         scrollbar_1a.grid(row=0, column=1, sticky="ns")
 
-        # 1b
-        frame_1b = ttk.LabelFrame(left_frame, text="1b. Onboarding Campaign Names (campaign_name)")
+        # 1b - Onboarding Campaign Names
+        frame_1b = ttk.LabelFrame(left_frame)
+        frame_1b.configure(labelwidget=tk.Label(
+            frame_1b,
+            text="Onboarding Campaign Names",
+            font=self.header_font,
+            fg="#0A1A66"
+        ))
         frame_1b.grid(row=1, column=0, sticky="nsew", pady=(5, 0))
         frame_1b.rowconfigure(0, weight=1)
         frame_1b.columnconfigure(0, weight=1)
 
-        self.listbox_1b = tk.Listbox(frame_1b, exportselection=False)
+        self.listbox_1b = tk.Listbox(
+            frame_1b,
+            exportselection=False,
+            font=self.content_font,
+            width=45  
+        )
         scrollbar_1b = ttk.Scrollbar(frame_1b, orient="vertical", command=self.listbox_1b.yview)
         self.listbox_1b.config(yscrollcommand=scrollbar_1b.set)
         self.listbox_1b.grid(row=0, column=0, sticky="nsew")
         scrollbar_1b.grid(row=0, column=1, sticky="ns")
 
-        # 2a
-        frame_2a = ttk.LabelFrame(right_frame, text="2a. SMS Names (campaign_name)")
+        # 2a - SMS Names
+        frame_2a = ttk.LabelFrame(right_frame)
+        frame_2a.configure(labelwidget=tk.Label(
+            frame_2a,
+            text="SMS Names",
+            font=self.header_font,
+            fg="#0A1A66"
+        ))
         frame_2a.grid(row=0, column=0, sticky="nsew", pady=(0, 5))
         frame_2a.rowconfigure(0, weight=1)
         frame_2a.columnconfigure(0, weight=1)
 
-        self.listbox_2a = tk.Listbox(frame_2a, exportselection=False)
+        self.listbox_2a = tk.Listbox(
+            frame_2a,
+            exportselection=False,
+            font=self.content_font,
+            width=45  
+        )
         scrollbar_2a = ttk.Scrollbar(frame_2a, orient="vertical", command=self.listbox_2a.yview)
         self.listbox_2a.config(yscrollcommand=scrollbar_2a.set)
         self.listbox_2a.grid(row=0, column=0, sticky="nsew")
         scrollbar_2a.grid(row=0, column=1, sticky="ns")
-        # When user clicks a campaign in 2a → update 2b with its examples
         self.listbox_2a.bind("<<ListboxSelect>>", self.on_sms_name_selected)
 
-        # 2b
-        frame_2b = ttk.LabelFrame(right_frame, text="2b. SMS Examples (text_sample)")
+        # 2b - SMS Examples
+        frame_2b = ttk.LabelFrame(right_frame)
+        frame_2b.configure(labelwidget=tk.Label(
+            frame_2b,
+            text="SMS Examples",
+            font=self.header_font,
+            fg="#0A1A66"
+        ))
         frame_2b.grid(row=1, column=0, sticky="nsew", pady=(5, 0))
         frame_2b.rowconfigure(0, weight=1)
         frame_2b.columnconfigure(0, weight=1)
 
-        self.text_2b = scrolledtext.ScrolledText(frame_2b, wrap="word", state="disabled")
+        self.text_2b = scrolledtext.ScrolledText(
+            frame_2b,
+            wrap="word",
+            state="disabled",
+            font=self.content_font,
+            width=45  
+        )
         self.text_2b.grid(row=0, column=0, sticky="nsew")
 
     # -------------------------------------------------------------------
@@ -298,11 +351,7 @@ class CampaignDriftApp:
             self.refresh_for_originator(originator)
 
     def on_sms_name_selected(self, event: tk.Event) -> None:
-        """
-        2b behavior:
-        When clicking a campaign name in 2a, show only the examples
-        that belong to that campaign (for the current originator).
-        """
+        """When clicking a campaign name in 2a, show its examples in 2b."""
         selection = self.listbox_2a.curselection()
         if not selection:
             return
