@@ -274,7 +274,7 @@ class CampaignDriftApp:
         frame_2a = ttk.LabelFrame(right_frame)
         frame_2a.configure(labelwidget=tk.Label(
             frame_2a,
-            text="SMS Names",
+            text="Messages' Names",
             font=self.header_font,
             fg="#0A1A66"
         ))
@@ -298,7 +298,7 @@ class CampaignDriftApp:
         frame_2b = ttk.LabelFrame(right_frame)
         frame_2b.configure(labelwidget=tk.Label(
             frame_2b,
-            text="SMS Examples",
+            text="Messages' Examples",
             font=self.header_font,
             fg="#0A1A66"
         ))
