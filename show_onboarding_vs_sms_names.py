@@ -87,7 +87,7 @@ def load_onboarding_names_for_originator(df_onboarding: pd.DataFrame, originator
         return [f"[No onboarding rows found for originator {originator}]"]
 
     vals = df_sub[ONBOARDING_NAME_COL].dropna().astype(str).unique().tolist()
-    return sorted(vals)
+    return vals
 
 
 def load_onboarding_campaign_names_for_originator(df_onboarding: pd.DataFrame, originator: str) -> List[str]:
@@ -97,7 +97,7 @@ def load_onboarding_campaign_names_for_originator(df_onboarding: pd.DataFrame, o
         return [f"[No onboarding rows found for originator {originator}]"]
 
     vals = df_sub[ONBOARDING_CAMPAIGN_COL].dropna().astype(str).unique().tolist()
-    return sorted(vals)
+    return vals
 
 
 # ---------- 2a & 2b from stage1/output ----------
