@@ -8,10 +8,12 @@ gpt-4o / gpt-4o-mini (which require max_tokens).
 
 from typing import Any, Tuple
 import pandas as pd
+import os
 
 import llm_client_openai as lc_openai
 import llm_client_azure_openai as lc_azure
 
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "azure")
 
 # ---------------------------------------------------------------------------
 # Model Utility
@@ -188,12 +190,13 @@ def main():
                 "School Message Summary Spanish",
                 "School Events Digest",
                 "Appointment Reminders Spanish",
+                "Let's play football this weekend!",
             ]
         }
     )
 
     # You may change the model to "gpt-5.1-mini" or "gpt-4o-mini"
-    provider = "openai"
+    provider = LLM_PROVIDER
     model = "gpt-5.1"
     temperature = 0.0
 
