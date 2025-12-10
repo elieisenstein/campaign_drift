@@ -32,25 +32,15 @@ INPUT_PREFIX = "input/ref"            # input raw CSV (Stage-1)
 OUTPUT_PREFIX = "output/ref_proto"    # prefix for all reference artifacts (Stage-1 + Stage-2)
 
 # ----------------------------------------------------------
-# Stage-1 HDBSCAN parameters (different laptops)
+# Stage-1 HDBSCAN parameters 
 # ----------------------------------------------------------
-HDBSCAN_PARAMS_A = dict(
+HDBSCAN_STAGE1 = dict(
     min_cluster_size=5,
     min_samples=1,
-    cluster_selection_epsilon=0.0,
-    cluster_selection_method="eom",
-    metric="euclidean",
-)
-
-HDBSCAN_PARAMS_B = dict(
-    min_cluster_size=20,
-    min_samples=10,
     cluster_selection_epsilon=0.1,
     cluster_selection_method="eom",
     metric="euclidean",
 )
-
-HDBSCAN_STAGE1 = HDBSCAN_PARAMS_A if LAPTOP_ID == "LAPTOP_A" else HDBSCAN_PARAMS_B
 
 # ----------------------------------------------------------
 # Stage-2 similarity + thresholds
