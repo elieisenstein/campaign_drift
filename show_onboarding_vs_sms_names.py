@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 import sys
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 import pandas as pd
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import scrolledtext
 import tkinter.font as tkfont
+import os
+
+# LLM compare function
+from comapare_onboarding_clusters_llm import compare_onboarding_clusters_llm
 
 # -------------------------------------------------------------------
 # CONFIG
@@ -26,6 +30,14 @@ TEXT_SAMPLE_COL = "text_sample"
 # Onboarding columns
 ONBOARDING_NAME_COL = "onboarding_name"   # 1a
 ONBOARDING_CAMPAIGN_COL = "campaign_name" # 1b
+
+# LLM settings (adjust as needed)
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "azure")
+LLM_MODEL = "gpt-5.1"          # e.g. "gpt-5.1", "gpt-5.1-mini", "gpt-4o-mini"
+LLM_TEMPERATURE = 0.0
+
+# Runtime cache (singleton) – per originator
+LLM_CACHE: Dict[str, str] = {}
 
 
 # -------------------------------------------------------------------
@@ -75,8 +87,8 @@ def load_onboarding_df() -> pd.DataFrame:
 def load_originators(df_campaigns: pd.DataFrame) -> List[str]:
     """Return sorted list of originators from CAMPAIGNS."""
     originators = [str(o) for o in df_campaigns[BUSINESS_NUMBER_COL].dropna().unique().tolist()]
-    #return sorted(originators)
-    return sorted([o for o in originators if len(o) > 4])  # filter out short codes
+    # filter out short codes
+    return sorted([o for o in originators if len(o) > 4])
 
 
 # ---------- 1a & 1b from onboarding_names.csv ----------
@@ -180,9 +192,15 @@ class CampaignDriftApp:
 
         self.originator_var = tk.StringVar(value=self.originators[0])
 
+        # LLM anomalies panel member
+        self.text_llm = None  # type: ignore
+
         self._build_widgets()
         self.refresh_for_originator(self.originators[0])
 
+    # -------------------------------------------------------------------
+    # UI BUILD
+    # -------------------------------------------------------------------
     def _build_widgets(self) -> None:
         # Top: Originator selector
         top_frame = ttk.Frame(self.root, padding=10)
@@ -206,10 +224,11 @@ class CampaignDriftApp:
         self.root.rowconfigure(1, weight=1)
         self.root.columnconfigure(0, weight=1)
 
-        # LEFT should grow more than RIGHT when resizing
-        main_frame.columnconfigure(0, weight=1)   # left wider
-        main_frame.columnconfigure(1, weight=1)   # right narrower
+        # Layout: row 0 -> columns; row 1 -> LLM panel + button
+        main_frame.columnconfigure(0, weight=1)   # left
+        main_frame.columnconfigure(1, weight=1)   # right
         main_frame.rowconfigure(0, weight=1)
+        main_frame.rowconfigure(1, weight=0)
 
         # Left column (Onboarding)
         left_frame = ttk.Frame(main_frame)
@@ -241,7 +260,7 @@ class CampaignDriftApp:
             frame_1a,
             exportselection=False,
             font=self.content_font,
-            width=45  
+            width=45
         )
         scrollbar_1a = ttk.Scrollbar(frame_1a, orient="vertical", command=self.listbox_1a.yview)
         self.listbox_1a.config(yscrollcommand=scrollbar_1a.set)
@@ -264,7 +283,7 @@ class CampaignDriftApp:
             frame_1b,
             exportselection=False,
             font=self.content_font,
-            width=45  
+            width=45
         )
         scrollbar_1b = ttk.Scrollbar(frame_1b, orient="vertical", command=self.listbox_1b.yview)
         self.listbox_1b.config(yscrollcommand=scrollbar_1b.set)
@@ -287,7 +306,7 @@ class CampaignDriftApp:
             frame_2a,
             exportselection=False,
             font=self.content_font,
-            width=45  
+            width=45
         )
         scrollbar_2a = ttk.Scrollbar(frame_2a, orient="vertical", command=self.listbox_2a.yview)
         self.listbox_2a.config(yscrollcommand=scrollbar_2a.set)
@@ -312,9 +331,54 @@ class CampaignDriftApp:
             wrap="word",
             state="disabled",
             font=self.content_font,
-            width=45  
+            width=45
         )
         self.text_2b.grid(row=0, column=0, sticky="nsew")
+
+        # ---------------------------------------------------------------
+        # Row 1 of main_frame: Button + LLM Anomalies panel
+        # ---------------------------------------------------------------
+        bottom_frame = ttk.Frame(main_frame)
+        bottom_frame.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(10, 0))
+        bottom_frame.columnconfigure(0, weight=0)
+        bottom_frame.columnconfigure(1, weight=1)
+
+        # Button to trigger LLM check
+        self.btn_llm_check = ttk.Button(
+            bottom_frame,
+            text="Check Consistency with LLM",
+            command=self.on_llm_check_clicked
+        )
+        self.btn_llm_check.grid(row=0, column=0, sticky="w", padx=(0, 10))
+
+        # LLM Anomalies panel
+        frame_llm = ttk.LabelFrame(bottom_frame)
+        frame_llm.configure(labelwidget=tk.Label(
+            frame_llm,
+            text="LLM Anomalies",
+            font=self.header_font,
+            fg="#0A1A66"
+        ))
+        frame_llm.grid(row=0, column=1, sticky="nsew")
+        frame_llm.rowconfigure(0, weight=1)
+        frame_llm.columnconfigure(0, weight=1)
+
+        self.text_llm = scrolledtext.ScrolledText(
+            frame_llm,
+            wrap="word",
+            state="disabled",
+            font=self.content_font,
+            height=4
+        )
+        self.text_llm.grid(row=0, column=0, sticky="nsew")
+
+        # Define tags for colored output
+        self.text_llm.config(state="normal")
+        self.text_llm.tag_configure("ok", foreground="#008000")       # green
+        self.text_llm.tag_configure("anomaly", foreground="#CC0000")  # red
+        self.text_llm.tag_configure("info", foreground="#000000")     # black
+        self.text_llm.delete("1.0", tk.END)
+        self.text_llm.config(state="disabled")
 
     # -------------------------------------------------------------------
     # REFRESH / HELPERS
@@ -331,6 +395,7 @@ class CampaignDriftApp:
         self._update_listbox(self.listbox_1b, onboarding_campaigns)
         self._update_listbox(self.listbox_2a, sms_names)
         self._set_text_2b("")
+        self._set_text_llm("", "info")  # clear LLM result panel
 
     def _update_listbox(self, listbox: tk.Listbox, items: List[str]) -> None:
         listbox.delete(0, tk.END)
@@ -342,6 +407,25 @@ class CampaignDriftApp:
         self.text_2b.delete("1.0", tk.END)
         self.text_2b.insert(tk.END, text)
         self.text_2b.config(state="disabled")
+
+    def _set_text_llm(self, text: str, status: str = "info") -> None:
+        """Update the LLM anomalies panel with colored text."""
+        if self.text_llm is None:
+            return
+        self.text_llm.config(state="normal")
+        self.text_llm.delete("1.0", tk.END)
+
+        tag = "info"
+        if status == "ok":
+            tag = "ok"
+        elif status == "anomaly":
+            tag = "anomaly"
+
+        self.text_llm.insert(tk.END, text, (tag,))
+        self.text_llm.config(state="disabled")
+
+    def _get_listbox_items(self, listbox: tk.Listbox) -> List[str]:
+        return listbox.get(0, tk.END)
 
     # -------------------------------------------------------------------
     # EVENT HANDLERS
@@ -364,6 +448,80 @@ class CampaignDriftApp:
         examples = load_sms_examples(originator, campaign_name)
         text = "\n\n-----\n\n".join(examples)
         self._set_text_2b(text)
+
+    def on_llm_check_clicked(self) -> None:
+        """Run LLM consistency check for current originator (on demand)."""
+        originator = self.originator_var.get()
+        if not originator:
+            messagebox.showwarning("Warning", "No originator selected.")
+            return
+
+        # Get 1a and 2a values
+        onboarding_names_raw = list(self._get_listbox_items(self.listbox_1a))
+        sms_names_raw = list(self._get_listbox_items(self.listbox_2a))
+
+        # Filter out placeholder lines that start with '[' (like "[Missing file...]")
+        onboarding_names = [x for x in onboarding_names_raw if not x.startswith("[")]
+        sms_names = [x for x in sms_names_raw if not x.startswith("[")]
+
+        if not onboarding_names:
+            self._set_text_llm(
+                "Cannot run LLM check: no valid onboarding names (1a) for this originator.",
+                "info",
+            )
+            return
+
+        if not sms_names:
+            self._set_text_llm(
+                "Cannot run LLM check: no valid SMS names (2a) for this originator.",
+                "info",
+            )
+            return
+
+        # Use cache if available
+        global LLM_CACHE
+        if originator in LLM_CACHE:
+            cached_text = LLM_CACHE[originator]
+            status = self._infer_status_from_result(cached_text)
+            self._set_text_llm(cached_text, status)
+            return
+
+        # Build dataframes for the LLM compare function
+        df_onboarding = pd.DataFrame({"name": onboarding_names})
+        df_clusters = pd.DataFrame({"name": sms_names})
+
+        try:
+            result_text, _raw = compare_onboarding_clusters_llm(
+                df_onboarding=df_onboarding,
+                df_clusters=df_clusters,
+                provider=LLM_PROVIDER,
+                model=LLM_MODEL,
+                temperature=LLM_TEMPERATURE,
+                onboarding_col="name",
+                cluster_col="name",
+            )
+        except Exception as e:
+            err_msg = f"Error calling LLM: {e}"
+            self._set_text_llm(err_msg, "info")
+            return
+
+        # Cache the textual result for this originator
+        LLM_CACHE[originator] = result_text
+
+        status = self._infer_status_from_result(result_text)
+        self._set_text_llm(result_text, status)
+
+    def _infer_status_from_result(self, text_result: str) -> str:
+        """
+        Infer status ('ok' / 'anomaly' / 'info') from the LLM text.
+        This is heuristic, based on your prompt contract.
+        """
+        normalized = (text_result or "").lower()
+        if "all clustered names fit the onboarding name" in normalized:
+            return "ok"
+        if "anomaly detected" in normalized:
+            return "anomaly"
+        return "info"
 
 
 def main() -> None:
