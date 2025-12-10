@@ -75,7 +75,8 @@ def load_onboarding_df() -> pd.DataFrame:
 def load_originators(df_campaigns: pd.DataFrame) -> List[str]:
     """Return sorted list of originators from CAMPAIGNS."""
     originators = [str(o) for o in df_campaigns[BUSINESS_NUMBER_COL].dropna().unique().tolist()]
-    return sorted(originators)
+    #return sorted(originators)
+    return sorted([o for o in originators if len(o) > 4])  # filter out short codes
 
 
 # ---------- 1a & 1b from onboarding_names.csv ----------
