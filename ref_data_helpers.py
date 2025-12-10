@@ -15,43 +15,6 @@ from sms_embed import embed_dedup_dataframe, save_embeddings, load_embeddings
 from llm_client_azure_openai import summarize_samples # alternate LLM client for Azure OpenAI
 from persist_utils import save_campaign_footprint
 
-
-# ------------------------------------------------------
-# HDBSCAN parameter switch by laptop profile
-# ------------------------------------------------------
-
-def _get_hdbscan_defaults() -> Dict[str, Any]:
-    """
-    Return HDBSCAN parameters based on LAPTOP_ID env var.
-
-    Set:
-        LAPTOP_ID=LAPTOP_A   -> small-data friendly params (e.g. 37 prototypes)
-        LAPTOP_ID=LAPTOP_B   -> original stricter params (e.g. 2800 prototypes)
-
-    If LAPTOP_ID is not set, defaults to LAPTOP_B behavior.
-    """
-    laptop_id = os.getenv("LAPTOP_ID", "LAPTOP_B").upper().strip()
-
-    if laptop_id == "LAPTOP_A":
-        # More permissive clustering for very small prototype sets
-        return dict(
-            min_cluster_size=5,
-            min_samples=2,
-            cluster_selection_epsilon=0.0,
-            cluster_selection_method="eom",
-            metric="euclidean",
-        )
-    else:
-        # Original parameters (good for larger prototype sets)
-        return dict(
-            min_cluster_size=20,
-            min_samples=10,
-            cluster_selection_epsilon=0.1,
-            cluster_selection_method="eom",
-            metric="euclidean",
-        )
-
-
 def _debug_print_hdbscan_params(params: Dict[str, Any]) -> None:
     print("[HDBSCAN] Using parameters:")
     for k, v in params.items():
@@ -63,7 +26,7 @@ def build_reference_embeddings_from_csv(
     data_dir: str,
     prefix: str,
     text_col: str = "raw_text",
-    model_path: str = r"C:/models/all-MiniLM-L6-v2",
+    model_path: str = r"./models/all-MiniLM-L6-v2",
     seed: int = 0,
     verbose: bool = True,
 ) -> Tuple[pd.DataFrame, np.ndarray]:
@@ -159,15 +122,10 @@ def build_reference_profile(
 
     X = _unit_normalize(X)
 
-    # Configure HDBSCAN
-    params = _get_hdbscan_defaults()
-    if hdbscan_params is not None:
-        params.update(hdbscan_params)
-
     if verbose:
-        _debug_print_hdbscan_params(params)
+        _debug_print_hdbscan_params(hdbscan_params)
 
-    clusterer = hdbscan.HDBSCAN(**params)
+    clusterer = hdbscan.HDBSCAN(**hdbscan_params)
     labels = clusterer.fit_predict(X)
 
     # Ignore noise
