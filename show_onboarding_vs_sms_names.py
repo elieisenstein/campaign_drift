@@ -127,7 +127,7 @@ def load_sms_names(originator: str) -> List[str]:
         return [f"[Missing column '{CAMPAIGN_NAME_COL}' in {path.name}]"]
 
     vals = df[CAMPAIGN_NAME_COL].dropna().astype(str).unique().tolist()
-    return sorted(vals)
+    return vals
 
 
 def load_sms_examples(originator: str, campaign_name: Optional[str]) -> List[str]:
@@ -241,7 +241,7 @@ class CampaignDriftApp:
         right_frame = ttk.Frame(main_frame)
         right_frame.grid(row=0, column=1, sticky="nsew", padx=(5, 0))
         right_frame.rowconfigure(0, weight=1)
-        right_frame.rowconfigure(1, weight=1)
+        right_frame.rowconfigure(1, weight=3)
         right_frame.columnconfigure(0, weight=1)
 
         # 1a - Onboarding Names
@@ -294,7 +294,7 @@ class CampaignDriftApp:
         frame_2a = ttk.LabelFrame(right_frame)
         frame_2a.configure(labelwidget=tk.Label(
             frame_2a,
-            text="Messages' Names",
+            text="Clusters' Names",
             font=self.header_font,
             fg="#0A1A66"
         ))
@@ -318,7 +318,7 @@ class CampaignDriftApp:
         frame_2b = ttk.LabelFrame(right_frame)
         frame_2b.configure(labelwidget=tk.Label(
             frame_2b,
-            text="Messages' Examples",
+            text="Clusters' Examples",
             font=self.header_font,
             fg="#0A1A66"
         ))
@@ -346,7 +346,7 @@ class CampaignDriftApp:
         # Button to trigger LLM check
         self.btn_llm_check = ttk.Button(
             bottom_frame,
-            text="Check Consistency with LLM",
+            text="Check drift (LLM)",
             command=self.on_llm_check_clicked
         )
         self.btn_llm_check.grid(row=0, column=0, sticky="w", padx=(0, 10))
