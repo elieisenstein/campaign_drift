@@ -48,6 +48,20 @@ def build_compare_prompt(
         "Your task: Determine whether every name in the second group can reasonably fit "
         "under the general name(s) of the first group.\n\n"
         "Instructions:\n"
+        
+        "IMPORTANT – Apply a generous, inclusive interpretation:\n"
+        "- Consider broad thematic similarity as sufficient for a match.\n"
+        "- Do NOT flag differences in wording, phrasing, specificity, level of detail, or language "
+        "  (e.g., Spanish vs. English) as anomalies if the overall subject matter is consistent.\n"
+        "- Treat verification codes, reminders, notices, alerts, summaries, digests, or event-related "
+        "  messages as belonging to the same general communication category unless they are clearly "
+        "  unrelated to the domain of the onboarding name(s).\n"
+        "- Only flag an anomaly when a name is clearly outside the scope, meaning it represents a "
+        "  genuinely different topic, industry, intent, or communication purpose.\n"
+        "- When in doubt, assume the name fits.\n\n"
+
+
+        
         "- Treat the First group as the reference campaign identity.\n"
         "- For each name in the Second group, assess whether it semantically belongs to, "
         "  or can be considered a subtype of, the First group.\n"
