@@ -9,6 +9,12 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import scrolledtext
 import tkinter.font as tkfont
+import time
+import traceback
+import os
+from dotenv import load_dotenv  
+
+load_dotenv()  
 
 # -------------------------------------------------------------------
 # CONFIG
@@ -32,8 +38,8 @@ ONBOARDING_NAME_COL = "onboarding_name"   # 1a
 ONBOARDING_CAMPAIGN_COL = "campaign_name" # 1b
 
 # LLM config (adapt to your environment)
-LLM_PROVIDER = "openai"          # or "azure", etc.
-LLM_MODEL = "gpt-4o-mini"        # adapt as needed
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "azure")         
+LLM_MODEL = "gpt-5.1" #"gpt-4o-mini"        # adapt as needed
 LLM_TEMPERATURE = 0.0
 
 # -------------------------------------------------------------------
@@ -684,6 +690,7 @@ class CampaignDriftApp:
             df_clusters = pd.DataFrame({"name": sms_names})
 
             try:
+                print("calling LLM for originator:", originator)
                 result_text, _raw = compare_onboarding_clusters_llm(
                     df_onboarding=df_onboarding,
                     df_clusters=df_clusters,
@@ -695,8 +702,11 @@ class CampaignDriftApp:
                 )
                 LLM_CACHE[originator] = result_text
                 prepared += 1
-            except Exception:
+                #time.sleep(0.3)  # brief pause to avoid rate limits
+            except Exception as e:
                 errors += 1
+                print(f"\n[LLM error] originator={originator}  {repr(e)}\n")
+                
 
             # UI progress update every 5 originators
             if i % 5 == 0:
